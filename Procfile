@@ -1,0 +1,1 @@
+web: gunicorn horoscopeAPI.wsgi --log-file -

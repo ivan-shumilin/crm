@@ -1,0 +1,41 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<div class="col-md-4 offset-md-4">
+
+{% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+    {% else %}
+        <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+
+<form class="form-signin" method="post">
+    {% csrf_token %}
+    <div class="form-error">{{ form.non_field_errors }}</div>
+    {% for f in user_form %}
+            <label class="sr-only" for="{{ f.id_for_label }}">
+                {{f.label}}:
+            </label>
+            {{ f }}
+    {% endfor %}
+    <button class="btn btn-xl btn-primary btn-block" type="submit" style="margin-top: 15px;">Войти</button>
+    {% if errors %}
+        <div style="color: #ab2437;">{{ errors }}</div>
+    {% endif %}
+</form>
+
+
+<ul style="margin-top: 3px;padding-left: 0px;">
+<!--    <li><a href="{% url 'password_reset' %}">Забыли пароль?</a></li>-->
+    <li><a href="{% url 'register' %}">Регистрация</a></li>
+</ul>
+</div>
+{% endblock %}
