@@ -13,50 +13,14 @@ import json
 
 from django.db import transaction
 from django.utils.dateparse import parse_date
-import fake_useragent
 import requests
-from bs4 import BeautifulSoup
+
 
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate, login
 
-
-def parsing():
-    """
-     Парсинг гороскопа.
-     Возврещает список который содержит словари с гороскопом для каждого знака.
-    """
-    user = fake_useragent.UserAgent().random  # меняем каждый раз user agent
-    header = {'user-agent': user}
-    link = 'https://www.astrocentr.ru/index.php?przd=horoe&str=index'
-    forecast_item = {}
-    forecasts = []
-    response = requests.get(link, headers=header).text
-    soup = BeautifulSoup(response, 'lxml')
-    # парсим общий прогноз для всез знаков
-    block = soup.find('div', class_="main_text")
-    forecast_item['sing'] = 'general'
-    forecast_item['description'] = block.find('p').get_text()
-    forecasts.append(forecast_item.copy())
-
-    for i in range(1, 13):  # парсим ежедневный прогноз для каждого знака зодиака
-        id = 'horo' + str(i)
-        desc = soup.find('div', id=id)
-        forecast_item['sing'] = desc.find('legend', class_="uv_legend").get_text()
-        forecast_item['description'] = desc.find('p').get_text()
-        forecasts.append(forecast_item.copy())
-    return forecasts
-
-
-def have_forecast_today():
-    """ Вернет True если есть прогноз с сегодняшний датой, иначе False """
-    if len(Forecast.objects.filter(sing='general')) != 0:
-        if datetime.date.today() == Forecast.objects.filter(sing='general')[0].date_create:
-            return True
-    else:
-        return False
 
 
 @transaction.atomic  # инструмент управления транзакциями базы данных
@@ -72,6 +36,14 @@ def load_forecast():
     # https://docs.djangoproject.com/en/4.0/ref/models/querysets/#bulk-create
     # вставляет предоставленный список объектов в базу данных (обычно только 1 запрос, независимо от того, сколько объектов имеется)
     Forecast.objects.bulk_create(to_create)
+
+class BaseAPIView(APIView):
+    def post(self, request):
+        data = request.data
+        print(data)
+        with open('data.json', 'w', encoding='utf-8') as outfile:
+            json.dump(data, outfile, ensure_ascii=False)
+        return Response(data)
 
 
 class GetForecastInfoView(APIView):

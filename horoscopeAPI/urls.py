@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include, re_path
+from daily_horoscopes.views import *
 
 
 urlpatterns = [
@@ -22,6 +23,7 @@ urlpatterns = [
     path('', include('daily_horoscopes.urls')),
     path('api/v1/auth/', include('djoser.urls')),
     re_path('auth/', include('djoser.urls.authtoken')),
+    path('api/v1/baselist/', BaseAPIView.as_view()),
 
 ]
 
