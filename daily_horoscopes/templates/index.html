@@ -1,4 +1,41 @@
 {% extends "base_generic.html" %}
 {% block content %}
-    <p>тут будет меню</p>
+
+    {% for menu_item in menu %}
+      <li>
+        <p>{{ menu_item }}, {{ menu_item.title }}, {{ menu_item.diet }}</p>
+        {% for diet_item in diet_all %}
+        <div class="ui slider checkbox">
+            <input id="diet_item" name="{{ diet_item }}" type="checkbox" value="{{ diet_item }}"{% if diet_item in menu_item.diet %} checked="checked"{% endif %}>
+            <label>{{ diet_item }}</label>
+            <p>{{ menu_item.diet }}</p>
+        </div>
+        {% endfor %}
+      </li>
+    {% endfor %}
+{% for value, text in form.providers.field.choices %}
+  <div class="ui slider checkbox">
+    <input id="id_providers_{{ forloop.counter0 }}" name="{{ form.providers.name }}" type="checkbox" value="{{ value }}"{% if value in checked_providers %} checked="checked"{% endif %}>
+    <label>{{ text }}</label>
+  </div>
+{% endfor %}
+
+ <div class="price-categories flex flex-left flex-middle flex-nowrap">
+                <div class="price-category checkbox">
+                    <input id="menu-form-price-category-605-1" checked="Null" name="items[62a9c5c6b567f][price_category_ids][]" type="checkbox" value="1">
+                    <div class="switch switch-processed"></div>
+                    <label for="menu-form-price-category-605-1">
+                        Light, 300 ₽
+                    </label>
+                </div>
+                <div class="price-category checkbox">
+                    <input id="menu-form-price-category-605-2" checked="" name="items[62a9c5c6b567f][price_category_ids][]" type="checkbox" value="2">
+                    <div class="switch switch-processed"></div>
+                    <label for="menu-form-price-category-605-2">
+                        Prime, 450 ₽
+                    </label>
+                </div>
+</div>
+
 {% endblock %}
+

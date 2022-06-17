@@ -10,6 +10,7 @@
 # нужно использовать поле passwordInput
 from django import forms
 from django.contrib.auth.models import User
+from .models import *
 
 
 class UserRegistrationForm(forms.ModelForm):
@@ -43,3 +44,17 @@ class UserloginForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'password')
+
+
+class MenuForm(forms.ModelForm):
+    menu = Menu.obj
+    ovd = forms.BooleanField(label='ОВД', required=None, initial=)
+    shd = forms.BooleanField(label='ЩД', required=None)
+    bd = forms.BooleanField(label='БД', required=None)
+    vbd = forms.BooleanField(label='ВБД', required=None)
+
+
+
+    class Meta:
+        model = Menu
+        fields = ('ovd', 'shd', 'bd', 'vbd')

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Forecast
-from .forms import UserRegistrationForm, UserloginForm
+from .models import Forecast, Menu
+from .forms import UserRegistrationForm, UserloginForm, MenuForm
 
 from rest_framework import generics
 from rest_framework.response import Response
@@ -64,8 +64,27 @@ class GetForecastInfoView(APIView):
 
 def index(request):
     """ Функция для отображения главной страницы. """
-    context = {'today': datetime.date.today(), }
+    menu = Menu.objects.all()
+    diet_all = ['ОВД', 'ЩД', 'БД']
+    context = {'today': datetime.date.today(), 'menu': menu, 'diet_all': diet_all }
     return render(request=request, template_name='index.html', context=context)
+
+
+def menu(request):
+    menu = Menu.objects.all()[0]
+    if request.method == 'POST':
+        form = MenuForm(request.POST)
+        if form.is_valid():
+            menu.ovd = form.cleaned_data['ovd']
+            menu.shd = form.cleaned_data['shd']
+            menu.bd = form.cleaned_data['bd']
+            menu.vbd = form.cleaned_data['vbd']
+            menu.save()
+
+    else:
+        form = MenuForm()
+
+    return render(request, 'menu.html', {'form': form, 'menu': menu})
 
 
 def register(request):
