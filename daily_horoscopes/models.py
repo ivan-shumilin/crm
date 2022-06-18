@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import date
 from multiselectfield import MultiSelectField
+import uuid
 
 # Create your models here.
 class Forecast(models.Model):
@@ -14,25 +15,15 @@ class Forecast(models.Model):
 
 
 class Menu(models.Model):
-    title = models.CharField(max_length=200)
-    compound = models.CharField(max_length=200, null=True)
-    pfc = models.CharField(max_length=5000, null=True)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    title = models.CharField(max_length=200, null=True)
+    pfc = models.CharField(max_length=300, null=True)
+    compound = models.CharField(max_length=300, null=True)
+
     ovd = models.BooleanField(null=True)
     shd = models.BooleanField(null=True)
     bd = models.BooleanField(null=True)
     vbd = models.BooleanField(null=True)
-    # STATUS = (
-    #     ('ОВД', 'ОВД'),
-    #     ('ЩД', 'ЩД'),
-    #     ('БД', 'БД'),
-    #     ('ВБД', 'ВБД'),
-    # )
-    #
-    # diet = MultiSelectField(
-    #     max_length=20,
-    #     choices=STATUS,
-    #       )
-
 
     def __str__(self):
         return f'{self.title}'

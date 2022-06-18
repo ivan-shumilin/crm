@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Forecast, Menu
-from .forms import UserRegistrationForm, UserloginForm, MenuForm
+from .forms import UserRegistrationForm, UserloginForm
+from django.forms import modelformset_factory
 
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import ForecastSerializer
 import calendar, datetime
+from django.template import RequestContext
 
 import json
 
@@ -15,12 +17,11 @@ from django.db import transaction
 from django.utils.dateparse import parse_date
 import requests
 
-
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate, login
-
+from django.forms import CheckboxInput, Textarea
 
 
 @transaction.atomic  # инструмент управления транзакциями базы данных
@@ -36,6 +37,7 @@ def load_forecast():
     # https://docs.djangoproject.com/en/4.0/ref/models/querysets/#bulk-create
     # вставляет предоставленный список объектов в базу данных (обычно только 1 запрос, независимо от того, сколько объектов имеется)
     Forecast.objects.bulk_create(to_create)
+
 
 class BaseAPIView(APIView):
     def post(self, request):
@@ -62,29 +64,51 @@ class GetForecastInfoView(APIView):
         return Response(serializer_for_queryset)
 
 
+# def index(request):
+#     """ Функция для отображения главной страницы. """
+#     menu = Menu.objects.all()
+#     diet_all = ['ОВД', 'ЩД', 'БД']
+#     context = {'today': datetime.date.today(), 'menu': menu, 'diet_all': diet_all}
+#     return render(request=request, template_name='index.html', context=context)
+
+
+# def menu(request):
+#     menu = Menu.objects.all()
+#     if request.method == 'POST':
+#         form = MenuForm(request.POST)
+#         if form.is_valid():
+#             menu.ovd = form.cleaned_data['ovd']
+#             menu.shd = form.cleaned_data['shd']
+#             menu.bd = form.cleaned_data['bd']
+#             menu.vbd = form.cleaned_data['vbd']
+#             menu.save()
+#
+#     else:
+#         form = MenuForm()
+#
+#     return render(request, 'menu.html', {'form': form, 'menu': menu})
+
 def index(request):
-    """ Функция для отображения главной страницы. """
-    menu = Menu.objects.all()
-    diet_all = ['ОВД', 'ЩД', 'БД']
-    context = {'today': datetime.date.today(), 'menu': menu, 'diet_all': diet_all }
-    return render(request=request, template_name='index.html', context=context)
-
-
-def menu(request):
-    menu = Menu.objects.all()[0]
+    MenuFormSet = modelformset_factory(Menu,
+                                       fields=('pfc', 'title', 'compound', 'ovd', 'shd', 'bd', 'vbd'),
+                                       widgets={'ovd': CheckboxInput(attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+                                                'shd': CheckboxInput(attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+                                                'bd': CheckboxInput(attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+                                                'vbd': CheckboxInput(attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+                                                'title': Textarea(attrs={'style': "display: none;"}),
+                                                'compound': Textarea(attrs={'style': "display: none;"}),
+                                                'pfc': Textarea(attrs={'style': "display: none;"}),
+                                                },
+                                       extra=0,)
     if request.method == 'POST':
-        form = MenuForm(request.POST)
-        if form.is_valid():
-            menu.ovd = form.cleaned_data['ovd']
-            menu.shd = form.cleaned_data['shd']
-            menu.bd = form.cleaned_data['bd']
-            menu.vbd = form.cleaned_data['vbd']
-            menu.save()
-
+        formset = MenuFormSet(request.POST, request.FILES)
+        if not formset.is_valid():
+            return render(request, 'index.html', {'formset': formset})
+        else:
+            formset.save()
     else:
-        form = MenuForm()
-
-    return render(request, 'menu.html', {'form': form, 'menu': menu})
+        formset = MenuFormSet()
+    return render(request, 'index.html', {'formset': formset})
 
 
 def register(request):
@@ -103,7 +127,8 @@ def register(request):
             }
             response = requests.post(url, headers=headers, json=payload).json()
 
-            if payload['username'] == response.get('username'):  # если имя пользователя есть в ответе регестрация прошла успешно
+            if payload['username'] == response.get(
+                    'username'):  # если имя пользователя есть в ответе регестрация прошла успешно
                 return render(request, 'registration/register_done.html', {'new_user': user_form.cleaned_data})
             else:
                 errors = list(response.values())
