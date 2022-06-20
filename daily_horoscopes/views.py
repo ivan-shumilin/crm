@@ -42,7 +42,6 @@ def load_forecast():
 class BaseAPIView(APIView):
     def post(self, request):
         data = request.data
-        print(data)
         with open('data.json', 'w', encoding='utf-8') as outfile:
             json.dump(data, outfile, ensure_ascii=False)
         return Response(data)
