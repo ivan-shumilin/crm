@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Forecast, Menu
+from .models import Forecast, Menu, Base
 from .forms import UserRegistrationForm, UserloginForm
 from django.forms import modelformset_factory
 
@@ -42,6 +42,9 @@ def load_forecast():
 class BaseAPIView(APIView):
     def post(self, request):
         data = request.data
+        data = str(data)
+
+        Base.objects.create(base=data)
         with open('data.json', 'w', encoding='utf-8') as outfile:
             json.dump(data, outfile, ensure_ascii=False)
         return Response(data)
