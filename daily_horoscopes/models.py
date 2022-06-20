@@ -14,7 +14,7 @@ class Forecast(models.Model):
 
 class Base(models.Model):
     date_create = models.DateField(default=date.today)
-    base = models.CharField(max_length=5000000, null=True)
+    base = models.CharField(max_length=50000, null=True)
 
     def __str__(self):
         return f'{self.base}'
