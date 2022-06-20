@@ -1,6 +1,5 @@
 from django.db import models
 from datetime import date
-from multiselectfield import MultiSelectField
 import uuid
 
 # Create your models here.
