@@ -1,6 +1,449 @@
-[
-  {
-    "day": "sunday",
-    "description": "Возможно, сегодня вам нужно будет вернуться к каким-то старым проблемам, вопросам, которые казались решенными. Едва ли это будет особенно интересно – вы предпочли бы сосредоточиться на новых делах. Зато появится полезный опыт, вы многому научитесь. Да и отношения с окружающими могут измениться к лучшему.\n\nВероятны незапланированные расходы. Часто они связаны с вашим желанием порадовать близких, сделать им приятные сюрпризы. Благодаря вам улучшится настроение у тех, кто пал духом и в последнее время был настроен пессимистично."
+{
+  'menu': {
+    'id': 678,
+    'date': '20.06.2022',
+    'status': 'completed',
+    'completed_at': '20.06.2022 12:22:07',
+    'created_at': '17.06.2022 09:50:16',
+    'combo_price': 350,
+    'location': {
+      'id': 4,
+      'name': 'hadassah',
+      'subdomain': 'hadassah'
+    },
+    'items': [
+      {
+        'id': 13204,
+        'combo': False,
+        'product': {
+          'id': 14,
+          'name': 'Микс-салат с курицей 100 гр.',
+          'price': 129,
+          'carbohydrate': '2.14830',
+          'fat': '9.16080',
+          'fiber': '4.32850',
+          'energy': '108.35660',
+          'image': 'c7537877-1436-4df9-bd93-b0b89ec6a516.jpg',
+          'vegan': 0,
+          'allergens': 0,
+          'lactose_free': 0,
+          'sugarless': 0,
+          'gluten_free': 0,
+          'description': 'Состав:Куриное филе запеченное, салат айсберг,капуста пекинская,перец болгарский, заправка салатная(масло раст.,сок лимона,горчица зерн.,мед, соль, перец)'
+        },
+        'category': {
+          'id': 15,
+          'name': 'Салаты'
+        }
+      },
+      {
+        'id': 13205,
+        'combo': False,
+        'product': {
+          'id': 1276,
+          'name': 'Бурито с индейкой и овощами 200 гр.',
+          'price': 219,
+          'carbohydrate': '41.61168',
+          'fat': '24.95394',
+          'fiber': '21.91266',
+          'energy': '478.68678',
+          'image': None,
+          'vegan': 0,
+          'allergens': 0,
+          'lactose_free': 0,
+          'sugarless': 0,
+          'gluten_free': 0,
+          'description': None
+        },
+        'category': {
+          'id': 6,
+          'name': 'Вторые блюда'
+        }
+      },
+      {
+        'id': 13206,
+        'combo': False,
+        'product': {
+          'id': 369,
+          'name': 'Лапша гречневая с овощами и сыром фета 200 гр.',
+          'price': 249,
+          'carbohydrate': '40.93200',
+          'fat': '6.38400',
+          'fiber': '9.29200',
+          'energy': '258.34800',
+          'image': '7aafe147-aa61-4240-8d35-70e36e9482ba.jpg',
+          'vegan': 0,
+          'allergens': 0,
+          'lactose_free': 0,
+          'sugarless': 0,
+          'gluten_free': 0,
+          'description': 'Состав:Лапша гречневая, лук репчатый, морковь,кабачки, перец болгарский,сыр фета, соевый соус, масло подс., масло кунжутное.'
+        },
+        'category': {
+          'id': 6,
+          'name': 'Вторые блюда'
+        }
+      },
+      {
+        'id': 13207,
+        'combo': False,
+        'product': {
+          'id': 1017,
+          'name': 'Салат с горбушей 100 гр.',
+          'price': 119,
+          'carbohydrate': '4.97766',
+          'fat': '16.34659',
+          'fiber': '5.81943',
+          'energy': '190.30760',
+          'image': '3200e074-2839-4d34-989f-fd7bb3d16387.jpg',
+          'vegan': 0,
+          'allergens': 0,
+          'lactose_free': 0,
+          'sugarless': 0,
+          'gluten_free': 0,
+          'description': 'Состав: артофель отварной,горбуша консервированная,фасоль стручковая,огурцы маринованные, зелень, специи'
+        },
+        'category': {
+          'id': 15,
+          'name': 'Салаты'
+        }
+      },
+      {
+        'id': 13208,
+        'combo': False,
+        'product': {
+          'id': 1025,
+          'name': 'Салат с редисом, огурцом и йогуртовой заправкой 100 гр.',
+          'price': 89,
+          'carbohydrate': '3.33372',
+          'fat': '0.74574',
+          'fiber': '1.64790',
+          'energy': '26.63339',
+          'image': '527e5511-419f-461b-8dee-5a6894872c4f.jpg',
+          'vegan': 0,
+          'allergens': 0,
+          'lactose_free': 0,
+          'sugarless': 0,
+          'gluten_free': 0,
+          'description': 'Состав: огурец, редис, заправка лимонно-медовая ( лимон, мед, горчица, масло оливковое, соль, перец).'
+        },
+        'category': {
+          'id': 15,
+          'name': 'Салаты'
+        }
+      },
+      {
+        'id': 13209,
+        'combo': False,
+        'product': {
+          'id': 292,
+          'name': 'Индейка запеченная с грибами и сыром 110 гр.',
+          'price': 199,
+          'carbohydrate': '1.75670',
+          'fat': '9.61510',
+          'fiber': '21.65570',
+          'energy': '180.18660',
+          'image': '687c2fe5-b0f1-4ff0-8a8b-acfb5356af10.jpg',
+          'vegan': 0,
+          'allergens': 0,
+          'lactose_free': 0,
+          'sugarless': 0,
+          'gluten_free': 0,
+          'description': 'Состав: индейка филе грудки, шампиньоны, сметана, мука пшенинчная, сыр моцарелла.'
+        },
+        'category': {
+          'id': 6,
+          'name': 'Вторые блюда'
+        }
+      },
+      {
+        'id': 13210,
+        'combo': True,
+        'product': {
+          'id': 460,
+          'name': 'Филе цыпленка с лечо 150 гр',
+          'price': 179,
+          'carbohydrate': '6.46800',
+          'fat': '6.06450',
+          'fiber': '13.64250',
+          'energy': '135.02850',
+          'image': '324663a9-9210-4949-ac6c-1d06febdbfab.jpg',
+          'vegan': 0,
+          'allergens': 0,
+          'lactose_free': 0,
+          'sugarless': 0,
+          'gluten_free': 0,
+          'description': 'Состав:Филе куриной грудки,лук репч.,перец болгарский,горошек зеленый,морковь,томатная паста, масло раст.,специи,зелень.'
+        },
+        'category': {
+          'id': 6,
+          'name': 'Вторые блюда'
+        }
+      },
+      {
+        'id': 13211,
+        'combo': False,
+        'product': {
+          'id': 532,
+          'name': 'Гратен из цветной капусты 150 гр.',
+          'price': 139,
+          'carbohydrate': '4.78050',
+          'fat': '7.86000',
+          'fiber': '9.41550',
+          'energy': '127.51950',
+          'image': 'b6e3d312-1656-4f22-8eec-a6d3311de9e6.jpg',
+          'vegan': 0,
+          'allergens': 0,
+          'lactose_free': 0,
+          'sugarless': 0,
+          'gluten_free': 0,
+          'description': 'Состав: капуста цветная, масло подсолнечное, соус Бешамель(мука,масло слив.,молоко,мускатный орех,соль, перец).'
+        },
+        'category': {
+          'id': 9,
+          'name': 'Гарниры'
+        }
+      },
+      {
+        'id': 13212,
+        'combo': True,
+        'product': {
+          'id': 575,
+          'name': 'Пенне с маслом 150 гр.',
+          'price': 59,
+          'carbohydrate': '52.27500',
+          'fat': '7.36200',
+          'fiber': '7.02000',
+          'energy': '303.43800',
+          'image': '9f8d7fcf-43a1-43a4-92a7-bc722d2d33cd.jpg',
+          'vegan': 1,
+          'allergens': None,
+          'lactose_free': None,
+          'sugarless': None,
+          'gluten_free': None,
+          'description': 'Состав: макароны пенне, масло подсолнечное, соль.'
+        },
+        'category': {
+          'id': 9,
+          'name': 'Гарниры'
+        }
+      },
+      {
+        'id': 13213,
+        'combo': True,
+        'product': {
+          'id': 1199,
+          'name': 'Суп гречневый с курицей 250 гр.',
+          'price': 89,
+          'carbohydrate': '28.20500',
+          'fat': '5.41750',
+          'fiber': '7.93250',
+          'energy': '193.31500',
+          'image': '8d276294-9679-48f6-9f26-490e49b263ff.jpg',
+          'vegan': 0,
+          'allergens': 0,
+          'lactose_free': 0,
+          'sugarless': 0,
+          'gluten_free': 0,
+          'description': 'Бульон куриный,лук репч.,морковь, картофель, мясо цыпленка,гречка, соль,перец, лавр.лист'
+        },
+        'category': {
+          'id': 17,
+          'name': 'Первые блюда'
+        }
+      },
+      {
+        'id': 13214,
+        'combo': False,
+        'product': {
+          'id': 440,
+          'name': 'Судак с соусом Терияки 75/20 гр.',
+          'price': 199,
+          'carbohydrate': '1.37845',
+          'fat': '5.39125',
+          'fiber': '17.34225',
+          'energy': '123.39930',
+          'image': 'b9e86b8c-c445-4b24-88f9-c3a28fd23f56.jpg',
+          'vegan': 0,
+          'allergens': 0,
+          'lactose_free': 0,
+          'sugarless': 0,
+          'gluten_free': 0,
+          'description': 'Состав:Судак(филе), соус Терияки,масло раст.,специи'
+        },
+        'category': {
+          'id': 6,
+          'name': 'Вторые блюда'
+        }
+      },
+      {
+        'id': 13215,
+        'combo': False,
+        'product': {
+          'id': 472,
+          'name': 'Шницель рубленый говяжий 100гр.',
+          'price': 179,
+          'carbohydrate': '2.16500',
+          'fat': '10.43800',
+          'fiber': '15.21500',
+          'energy': '163.45900',
+          'image': 'deffe92f-59c9-4957-ac7d-45f63f46fd78.jpg',
+          'vegan': 0,
+          'allergens': 0,
+          'lactose_free': 0,
+          'sugarless': 0,
+          'gluten_free': 0,
+          'description': 'Состав: Фарш говяжий,сухари панировочные, масло раст.'
+        },
+        'category': {
+          'id': 6,
+          'name': 'Вторые блюда'
+        }
+      },
+      {
+        'id': 13216,
+        'combo': False,
+        'product': {
+          'id': 556,
+          'name': 'Картофель жареный с грибами 150 гр.',
+          'price': 89,
+          'carbohydrate': '33.67950',
+          'fat': '2.47800',
+          'fiber': '4.05750',
+          'energy': '173.25450',
+          'image': '26c201b0-e7a5-4708-b871-243e3bc7f303.jpg',
+          'vegan': 0,
+          'allergens': 0,
+          'lactose_free': 0,
+          'sugarless': 0,
+          'gluten_free': 0,
+          'description': 'Состав: Картофель, грибы шампиньоны, лук репчатый, масло раст., специи'
+        },
+        'category': {
+          'id': 9,
+          'name': 'Гарниры'
+        }
+      },
+      {
+        'id': 13217,
+        'combo': False,
+        'product': {
+          'id': 1248,
+          'name': 'Суп-крем из моркови с сельдереем 250 гр.',
+          'price': 89,
+          'carbohydrate': '8.06245',
+          'fat': '14.60490',
+          'fiber': '1.75499',
+          'energy': '170.71136',
+          'image': '1ae29149-a9c5-4a19-aa6f-c56225616b0f.jpg',
+          'vegan': 0,
+          'allergens': 0,
+          'lactose_free': 0,
+          'sugarless': 0,
+          'gluten_free': 0,
+          'description': 'Состав: лук репчаый, морковь, сельдерей, мука, перец, соль, сливки 10%.'
+        },
+        'category': {
+          'id': 17,
+          'name': 'Первые блюда'
+        }
+      },
+      {
+        'id': 13218,
+        'combo': True,
+        'product': {
+          'id': 1482,
+          'name': 'Салат из квашеной капусты с брусникой 100 гр.',
+          'price': 79,
+          'carbohydrate': '4.77105',
+          'fat': '5.17114',
+          'fiber': '0.93020',
+          'energy': '69.34525',
+          'image': 'e0716b9e-d09a-4c7a-bd25-d0ac56608d9a.jpg',
+          'vegan': 1,
+          'allergens': None,
+          'lactose_free': None,
+          'sugarless': None,
+          'gluten_free': None,
+          'description': 'Состав: капуста квашенная, яблоки, соль, сахар, масло растительное.'
+        },
+        'category': {
+          'id': 15,
+          'name': 'Салаты'
+        }
+      },
+      {
+        'id': 13219,
+        'combo': False,
+        'product': {
+          'id': 570,
+          'name': 'Кускус с овощами 150 гр.',
+          'price': 109,
+          'carbohydrate': '29.96100',
+          'fat': '1.85550',
+          'fiber': '4.70250',
+          'energy': '155.34750',
+          'image': '1028e22d-63cc-45be-8175-ad2b55277909.jpg',
+          'vegan': 0,
+          'allergens': 0,
+          'lactose_free': 0,
+          'sugarless': 0,
+          'gluten_free': 0,
+          'description': 'Состав: Кус-кус отварной, кабачки , морковь,перец болг., масло раст.,соль'
+        },
+        'category': {
+          'id': 9,
+          'name': 'Гарниры'
+        }
+      },
+      {
+        'id': 13220,
+        'combo': False,
+        'product': {
+          'id': 1191,
+          'name': 'Суп "Американский чаудер" 250 гр',
+          'price': 139,
+          'carbohydrate': '5.77000',
+          'fat': '21.34000',
+          'fiber': '10.72000',
+          'energy': '258.03250',
+          'image': '06ce42b5-eff3-4ad3-aafe-21598156847e.jpg',
+          'vegan': 0,
+          'allergens': 0,
+          'lactose_free': 0,
+          'sugarless': 0,
+          'gluten_free': 0,
+          'description': 'Состав: бульон куриный, бекон, кукуруза, сельдерей, перец болгарский, гауда, соль, перец горошком, сливки 33%, картофель.'
+        },
+        'category': {
+          'id': 17,
+          'name': 'Первые блюда'
+        }
+      },
+      {
+        'id': 13221,
+        'combo': False,
+        'product': {
+          'id': 960,
+          'name': 'Салат из пекинской капусты с помидором и сельдереем 100 гр.',
+          'price': 89,
+          'carbohydrate': '2.40000',
+          'fat': '10.14000',
+          'fiber': '0.90000',
+          'energy': '104.46000',
+          'image': 'd140a873-190b-4307-a77e-7885f3af3610.jpg',
+          'vegan': 0,
+          'allergens': 0,
+          'lactose_free': 0,
+          'sugarless': 0,
+          'gluten_free': 0,
+          'description': 'Состав: капуста китайская, сельдерей, помидор, масло подсолнечное, соль, перец.'
+        },
+        'category': {
+          'id': 15,
+          'name': 'Салаты'
+        }
+      }
+    ]
   }
-]
+}
