@@ -126,7 +126,7 @@ class BaseAPIView(APIView):
 def index(request):
 
     ProductFormSet = modelformset_factory(Product,
-                                       fields=('name', 'description', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd', 'vkd'),
+                                       fields=('iditem', 'name', 'description', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd', 'vkd'),
                                        widgets={'ovd': CheckboxInput(
                                            attrs={'class': 'form-check-input', 'type': 'checkbox'}),
                                            'shd': CheckboxInput(
@@ -143,7 +143,7 @@ def index(request):
                                                attrs={'class': 'form-check-input', 'type': 'checkbox'}),
                                            'name': Textarea(attrs={'style': "display: none;"}),
                                            'description': Textarea(attrs={'style': "display: none;"}),
-                                           # 'pfc': Textarea(attrs={'style': "display: none;"}),
+                                           'iditem': Textarea(attrs={'style': "display: none;"}),
                                        },
                                        extra=0, )
     if request.method == 'POST':

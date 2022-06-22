@@ -6,6 +6,7 @@
     {% csrf_token %}
     {{ formset.management_form }}
     {% for form in formset %}
+    {{ form.iditem }}
     {{ form.id }}
     {{ form.description }}
     {{ form.name }}
