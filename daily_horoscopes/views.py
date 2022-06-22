@@ -24,6 +24,8 @@ from django.contrib.auth import authenticate, login
 from django.forms import CheckboxInput, Textarea
 
 
+
+
 @transaction.atomic  # инструмент управления транзакциями базы данных
 def load_menu(dict_tests):
     # Product.objects.all().delete()  # очищаем базу данных перед тем как заполнить таблицу
@@ -33,10 +35,10 @@ def load_menu(dict_tests):
     menu_items = dict_tests['menu']['items']
     to_create = []  # плохая практика обращатьтся к базе в цикле.
     for menu_item in menu_items:
-        if (len(Product.objects.filter(id_item=menu_item['product']['id'])) == 0) and (
-                len([item for item in to_create if item.id_item == menu_item['product']['id']]) == 0):
+        if (len(Product.objects.filter(iditem=menu_item['product']['id'])) == 0) and (
+                len([item for item in to_create if item.iditem == menu_item['product']['id']]) == 0):
             to_create.append(Product(
-                id_item=menu_item['product']['id'],
+                iditem=menu_item['product']['id'],
                 name=menu_item['product']['name'],
                 price=menu_item['product']['price'],
                 carbohydrate=menu_item['product']['carbohydrate'],

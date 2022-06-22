@@ -11,7 +11,7 @@ class Base(models.Model):
 
 
 class Product(models.Model):
-    id_item = models.IntegerField()
+    iditem = models.IntegerField(null=True)
     name = models.CharField(max_length=200, null=True)
     price = models.IntegerField(null=True)
     carbohydrate = models.CharField(max_length=200, null=True)
