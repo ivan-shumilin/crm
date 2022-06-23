@@ -124,7 +124,7 @@ class BaseAPIView(APIView):
 #     return render(request, 'menu.html', {'form': form, 'menu': menu})
 
 def index(request):
-    load_menu('asdf')
+    Product.objects.all().delete()
     ProductFormSet = modelformset_factory(Product,
                                        fields=('iditem', 'name', 'description', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd', 'vkd'),
                                        widgets={'ovd': CheckboxInput(
