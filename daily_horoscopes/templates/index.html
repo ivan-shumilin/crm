@@ -6,10 +6,14 @@
     {% csrf_token %}
     {{ formset.management_form }}
     {% for form in formset %}
+
+
+
     {{ form.iditem }}
     {{ form.id }}
     {{ form.description }}
     {{ form.name }}
+
 
 
 
@@ -65,6 +69,8 @@
     </div>
     {% endfor %}
     <input class="btn btn-primary btn-lg btn-block" type="submit" value="Сохранить">
+    <p>{{formset.default_error_messages}}</p>
+    <p>{{formset.error_messages}}</p>
 </form>
 <!--<div style="">-->
 <!--    <button id="0" class="btn btn-primary"  type="submit" style="" onclick="cellClick(0)">Состав</button>-->
