@@ -1,77 +1,90 @@
 {% extends "base_generic.html" %}
 {% block content %}
 
-
-<form action="" method="post">
+<form method="post">
     {% csrf_token %}
     {{ formset.management_form }}
-    {% for form in formset %}
-
-
-
-    {{ form.iditem }}
-    {{ form.id }}
-    {{ form.description }}
-    {{ form.name }}
-
-
-
-
-    <div class="row">
-        <div class="col-12 col-md-3">{{ form.name.value }}</div>
-        <div class="col-12 col-md-1">
-            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal-start">Состав
-            </button>
-        </div>
-
-        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 20px;">
-            {{ form.ovd }}
-            <label class="form-check-label">ОВД</label>
-        </div>
-        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 12px;">{{ form.shd }}
-            <label class="form-check-label">ЩД</label></div>
-        <div class=" col-4  col-md-1 form-check form-switch" style="margin-left: 12px;">{{ form.bd }}
-            <label class="form-check-label">БД</label></div>
-        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.vbd }}
-            <label class="form-check-label">ВБД</label></div>
-        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.nbd }}
-            <label class="form-check-label">НБД</label></div>
-        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.nkd }}
-            <label class="form-check-label">НКД</label></div>
-        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.vkd }}
-            <label class="form-check-label">ВКД</label></div>
-        <hr>
-    </div>
-
-
-
-    <div id="modal-start" class="modal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ form.name.value }}</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Состав:</strong> {{ form.description.value }}</p>
-                    <hr>
-                    <p><strong>БЖУ:</strong>Белки - 19,0 г, жиры - 14,5 г, углеводы - 56,3 г, ккал - 431,8</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn-close btn btn-secondary" data-bs-dismiss="modal"
-                            aria-label="Close">Закрыть
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-    <input class="btn btn-primary btn-lg btn-block" type="submit" value="Сохранить">
+    <table>
+        {% for form in formset %}
+        {{ form }}
+        {% endfor %}
+    </table>
+    {{ formset.errors }}
+    <input class="btn btn-primary btn-lg btn-block" type="submit" value="Сохранить">-->
     <p>{{formset.default_error_messages}}</p>
     <p>{{formset.error_messages}}</p>
 </form>
+<!--<form action="" method="post">-->
+<!--    {% csrf_token %}-->
+<!--    {{ formset.management_form }}-->
+<!--    {{ formset.as_p }}-->
+<!--    {% for form in formset %}-->
+
+
+
+<!--    {{ form.iditem }}-->
+<!--    {{ form.id }}-->
+<!--    {{ form.description }}-->
+<!--    {{ form.name }}-->
+
+
+
+
+<!--    <div class="row">-->
+<!--        <div class="col-12 col-md-3">{{ form.name.value }}</div>-->
+<!--        <div class="col-12 col-md-1">-->
+<!--            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal-start">Состав-->
+<!--            </button>-->
+<!--        </div>-->
+
+<!--        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 20px;">-->
+<!--            {{ form.ovd }}-->
+<!--            <label class="form-check-label">ОВД</label>-->
+<!--        </div>-->
+<!--        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 12px;">{{ form.shd }}-->
+<!--            <label class="form-check-label">ЩД</label></div>-->
+<!--        <div class=" col-4  col-md-1 form-check form-switch" style="margin-left: 12px;">{{ form.bd }}-->
+<!--            <label class="form-check-label">БД</label></div>-->
+<!--        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.vbd }}-->
+<!--            <label class="form-check-label">ВБД</label></div>-->
+<!--        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.nbd }}-->
+<!--            <label class="form-check-label">НБД</label></div>-->
+<!--        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.nkd }}-->
+<!--            <label class="form-check-label">НКД</label></div>-->
+<!--        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.vkd }}-->
+<!--            <label class="form-check-label">ВКД</label></div>-->
+<!--        <hr>-->
+<!--    </div>-->
+
+
+
+<!--    <div id="modal-start" class="modal" tabindex="-1">-->
+<!--        <div class="modal-dialog">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <h5 class="modal-title">{{ form.name.value }}</h5>-->
+<!--                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">-->
+<!--                        <span aria-hidden="true">&times;</span>-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <p><strong>Состав:</strong> {{ form.description.value }}</p>-->
+<!--                    <hr>-->
+<!--                    <p><strong>БЖУ:</strong>Белки - 19,0 г, жиры - 14,5 г, углеводы - 56,3 г, ккал - 431,8</p>-->
+<!--                </div>-->
+<!--                <div class="modal-footer">-->
+<!--                    <button type="button" class="btn-close btn btn-secondary" data-bs-dismiss="modal"-->
+<!--                            aria-label="Close">Закрыть-->
+<!--                    </button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    {% endfor %}-->
+<!--    <input class="btn btn-primary btn-lg btn-block" type="submit" value="Сохранить">-->
+<!--    <p>{{formset.default_error_messages}}</p>-->
+<!--    <p>{{formset.error_messages}}</p>-->
+<!--</form>-->
 <!--<div style="">-->
 <!--    <button id="0" class="btn btn-primary"  type="submit" style="" onclick="cellClick(0)">Состав</button>-->
 <!--</div>-->
