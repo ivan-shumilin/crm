@@ -12,8 +12,6 @@
     {{ form.name }}
 
 
-
-
     <div class="row">
         <div class="col-12 col-md-3">{{ form.name.value }}</div>
         <div class="col-12 col-md-1">
@@ -67,19 +65,8 @@
         </div>
     {% endfor %}
     <input class="btn btn-primary btn-lg btn-block" type="submit" value="Сохранить">
-    <p>{{formset.default_error_messages}}</p>
-    <p>{{formset.error_messages}}</p>
 </form>
 <div style="">
     <button id="0" class="btn btn-primary"  type="submit" style="" onclick="cellClick(0)">Состав</button>
 </div>
-
-
-<!--<script>-->
-<!--   var modalStart = new bootstrap.Modal(document.getElementById('modal-start'));-->
-<!--   function cellClick(id) {-->
-<!--       modalStart.show();-->
-<!--    }-->
-<!--</script>-->
-
 {% endblock %}
