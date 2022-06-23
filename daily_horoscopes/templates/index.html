@@ -5,11 +5,7 @@
 <form action="" method="post">
     {% csrf_token %}
     {{ formset.management_form }}
-    {{ formset.as_p }}
     {% for form in formset %}
-
-
-
     {{ form.iditem }}
     {{ form.id }}
     {{ form.description }}
@@ -21,7 +17,7 @@
     <div class="row">
         <div class="col-12 col-md-3">{{ form.name.value }}</div>
         <div class="col-12 col-md-1">
-            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal-start">Состав
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal-start{{ form.iditem.value }}">Состав
             </button>
         </div>
 
@@ -42,11 +38,11 @@
         <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.vkd }}
             <label class="form-check-label">ВКД</label></div>
         <hr>
-    </div>
 
 
 
-    <div id="modal-start" class="modal" tabindex="-1">
+
+    <div id="modal-start{{ form.iditem.value }}" class="modal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -68,6 +64,7 @@
             </div>
         </div>
     </div>
+        </div>
     {% endfor %}
     <input class="btn btn-primary btn-lg btn-block" type="submit" value="Сохранить">
     <p>{{formset.default_error_messages}}</p>
