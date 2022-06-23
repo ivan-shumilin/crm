@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from .models import Menu, Base, Product
+from .models import Base, Product
 from django.forms import modelformset_factory, CheckboxInput, Textarea
 from rest_framework import generics
 from rest_framework.response import Response
