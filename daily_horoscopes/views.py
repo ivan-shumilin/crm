@@ -42,19 +42,19 @@ def load_menu(dict_tests):
             to_create.append(Product(
                 iditem=menu_item['product']['id'],
                 name=menu_item['product']['name'],
-                price=menu_item['product']['price'],
-                carbohydrate=menu_item['product']['carbohydrate'],
-                fat=menu_item['product']['fat'],
-                fiber=menu_item['product']['fiber'],
-                energy=menu_item['product']['energy'],
-                image=menu_item['product']['image'],
-                vegan=menu_item['product']['vegan'],
-                allergens=menu_item['product']['allergens'],
-                lactose_free=menu_item['product']['lactose_free'],
-                sugarless=menu_item['product']['sugarless'],
-                gluten_free=menu_item['product']['gluten_free'],
+                # price=menu_item['product']['price'],
+                # carbohydrate=menu_item['product']['carbohydrate'],
+                # fat=menu_item['product']['fat'],
+                # fiber=menu_item['product']['fiber'],
+                # energy=menu_item['product']['energy'],
+                # image=menu_item['product']['image'],
+                # vegan=menu_item['product']['vegan'],
+                # allergens=menu_item['product']['allergens'],
+                # lactose_free=menu_item['product']['lactose_free'],
+                # sugarless=menu_item['product']['sugarless'],
+                # gluten_free=menu_item['product']['gluten_free'],
                 description=menu_item['product']['description'],
-                category=menu_item['category']['name']
+                # category=menu_item['category']['name']
             ))
     Product.objects.bulk_create(to_create)
 
@@ -124,7 +124,7 @@ class BaseAPIView(APIView):
 #     return render(request, 'menu.html', {'form': form, 'menu': menu})
 
 def index(request):
-
+    load_menu('asdf')
     ProductFormSet = modelformset_factory(Product,
                                        fields=('iditem', 'name', 'description', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd', 'vkd'),
                                        widgets={'ovd': CheckboxInput(
@@ -148,7 +148,7 @@ def index(request):
                                        extra=0, )
     if request.method == 'POST':
         formset = ProductFormSet(request.POST, request.FILES)
-        formset.save()
+
         if not formset.is_valid():
             return render(request, 'index.html', {'formset': formset})
         else:
