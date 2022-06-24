@@ -2,6 +2,7 @@ from django.db import models
 from datetime import date
 import uuid
 
+
 class Base(models.Model):
     date_create = models.DateField(default=date.today)
     base = models.CharField(max_length=50000000, null=True)
@@ -36,3 +37,9 @@ class Product(models.Model):
 
     def __str__(self):
         return f'{self.name}, {self.category}'
+
+
+class Timetable(models.Model):
+    date_from = models.DateField()
+    item = models.ForeignKey('Product', on_delete=models.RESTRICT, null=True)
+    date_create = models.DateField(default=date.today)

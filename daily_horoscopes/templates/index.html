@@ -15,7 +15,8 @@
     <div class="row">
         <div class="col-12 col-md-3">{{ form.name.value }}</div>
         <div class="col-12 col-md-1">
-            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#modal-start{{ form.iditem.value }}">Состав
+            <button type="button" class="btn btn-outline-primary" style="margin-bottom: 10px;" data-bs-toggle="modal"
+                    data-bs-target="#modal-start{{ form.iditem.value }}">Состав
             </button>
         </div>
 
@@ -38,35 +39,31 @@
         <hr>
 
 
-
-
-    <div id="modal-start{{ form.iditem.value }}" class="modal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ form.name.value }}</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Состав:</strong> {{ form.description.value }}</p>
-                    <hr>
-                    <p><strong>БЖУ:</strong>Белки - 19,0 г, жиры - 14,5 г, углеводы - 56,3 г, ккал - 431,8</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn-close btn btn-secondary" data-bs-dismiss="modal"
-                            aria-label="Close">Закрыть
-                    </button>
+        <div id="modal-start{{ form.iditem.value }}" class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ form.name.value }}</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Состав:</strong> {{ form.description.value|cut:"Состав:"|cut:"Состав"|cut:" :" }}</p>
+                        <hr>
+                        <p><strong>БЖУ:</strong> Белки - {{ form.fiber.value|floatformat  }} г, жиры - {{ form.fat.value|floatformat  }} г, углеводы - {{ form.carbohydrate.value|floatformat  }} г, ккал - {{ form.energy.value|floatformat  }}.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-close btn btn-secondary" data-bs-dismiss="modal"
+                                aria-label="Close">Закрыть
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-        </div>
     {% endfor %}
     <input class="btn btn-primary btn-lg btn-block" type="submit" value="Сохранить">
 </form>
-<div style="">
-    <button id="0" class="btn btn-primary"  type="submit" style="" onclick="cellClick(0)">Состав</button>
-</div>
+
 {% endblock %}
