@@ -136,14 +136,14 @@ def index(request):
     return render(request, 'index.html', context=data)
 
 
-class BaseAPIView(APIView):
-    def post(self, request):
-        data = request.data
-        data_str = str(data)
-        data_dict = dict(data)
-        load_menu(data_dict)
-        Base.objects.create(base=data_str)
-        return Response(data)
+# class BaseAPIView(APIView):
+#     def post(self, request):
+#         data = request.data
+#         data_str = str(data)
+#         data_dict = dict(data)
+#         load_menu(data_dict)
+#         Base.objects.create(base=data_str)
+#         return Response(data)
 
 
 # def index(request):
@@ -190,7 +190,7 @@ class BaseAPIView(APIView):
         data = request.data
         data_str = str(data)
         data_dict = dict(data)
-        data_dict = {
+        data_dict_fixture = {
             'menu': {'id': 682, 'date': '26.06.2022', 'status': 'completed', 'completed_at': '22.06.2022 17:52:31',
                      'created_at': '17.06.2022 10:26:17', 'combo_price': 350,
                      'location': {'id': 4, 'name': 'hadassah', 'subdomain': 'hadassah'}, 'items': [
