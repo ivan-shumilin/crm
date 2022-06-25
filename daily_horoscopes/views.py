@@ -76,7 +76,8 @@ def load_timetable(dict_tests):
 
 
 def index(request):
-
+    Timetable.objects.all().delete()
+    Product.objects.all().delete()
 
     error = ''
     ProductFormSet = modelformset_factory(Product,
