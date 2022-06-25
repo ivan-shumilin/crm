@@ -43,6 +43,5 @@ class Timetable(models.Model):
     datetime = models.DateField()
     item = models.ForeignKey('Product', on_delete=models.SET_NULL, null=True)
     date_create = models.DateField(default=date.today)
-    categoryy = models.CharField(max_length=2000, null=True)
     def __str__(self):
         return f'{self.item}'
