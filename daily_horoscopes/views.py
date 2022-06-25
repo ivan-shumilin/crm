@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Base, Product, Timetable
-from .forms import UserRegistrationForm, UserloginForm
+from .forms import UserRegistrationForm, UserloginForm, TimetableForm
 from django.forms import modelformset_factory
 
 from rest_framework import generics
@@ -64,7 +64,8 @@ def load_timetable(dict_tests):
     to_create = []
     for menu_item in menu_items:
         menu_item_date = datetime.strptime(dict_tests['menu']['date'], "%d.%m.%Y").strftime("%Y-%m-%d")
-        if len(Timetable.objects.filter(datetime=menu_item_date).filter(item=Product.objects.get(iditem=menu_item['product']['id']))) == 0:
+        if len(Timetable.objects.filter(datetime=menu_item_date).filter(
+                item=Product.objects.get(iditem=menu_item['product']['id']))) == 0:
             to_create.append(Timetable(
                 datetime=menu_item_date,
                 item=Product.objects.get(iditem=menu_item['product']['id'])
@@ -73,10 +74,11 @@ def load_timetable(dict_tests):
 
 
 def index(request):
+    error = ''
     ProductFormSet = modelformset_factory(Product,
                                           fields=(
-                                          'iditem', 'name', 'description', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd',
-                                          'vkd', 'carbohydrate', 'fat', 'fiber', 'energy',),
+                                              'iditem', 'name', 'description', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd',
+                                              'vkd', 'carbohydrate', 'fat', 'fiber', 'energy',),
                                           widgets={'ovd': CheckboxInput(
                                               attrs={'class': 'form-check-input', 'type': 'checkbox'}),
                                               'shd': CheckboxInput(
@@ -101,16 +103,38 @@ def index(request):
                                           },
                                           extra=0, )
     queryset = Product.objects.filter(timetable__datetime='2022-06-24')
-    if request.method == 'POST':
-        formset = ProductFormSet(request.POST, request.FILES, queryset=queryset,)
+    if request.method == 'POST' and 'save' in request.POST:
+        formset = ProductFormSet(request.POST, request.FILES, queryset=queryset, )
 
         if not formset.is_valid():
             return render(request, 'index.html', {'formset': formset})
         else:
             formset.save()
+
+    if request.method == 'POST' and 'find_date' in request.POST:
+        form_date = TimetableForm(request.POST)
+        if form_date.is_valid():
+            queryset = Product.objects.filter(timetable__datetime=str(form_date.cleaned_data["datetime"]))
+            formset = ProductFormSet(queryset=queryset)
+            data = {
+                'form_date': form_date,
+                'error': error,
+                'formset': formset,
+            }
+            print('Hi!')
+            return render(request, 'index.html', context=data)
+        else:
+            error = 'Некорректные данные'
     else:
         formset = ProductFormSet(queryset=queryset)
-    return render(request, 'index.html', {'formset': formset})
+        form_date = TimetableForm()
+        data = {
+            'form_date': form_date,
+            'error': error,
+            'formset': formset,
+        }
+    return render(request, 'index.html', context=data)
+
 
 class BaseAPIView(APIView):
     def post(self, request):
@@ -120,6 +144,7 @@ class BaseAPIView(APIView):
         load_menu(data_dict)
         Base.objects.create(base=data_str)
         return Response(data)
+
 
 # def index(request):
 #     # if request.user.is_authenticated:
@@ -428,5 +453,3 @@ def profile(request):
         template_name='profile.html',
         context=context
     )
-
-
