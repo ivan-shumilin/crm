@@ -40,6 +40,8 @@ class Product(models.Model):
 
 
 class Timetable(models.Model):
-    date_from = models.DateField()
+    datetime = models.DateField()
     item = models.ForeignKey('Product', on_delete=models.RESTRICT, null=True)
     date_create = models.DateField(default=date.today)
+    def __str__(self):
+        return f'{self.item}'
