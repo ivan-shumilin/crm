@@ -1,11 +1,11 @@
 # created by virtualenv automatically
 # Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
-**/__pycache__
-*.pyc
-/daily_horoscopes/migrations/__pycache__
+#__pycache__/
+#*.py[cod]
+#*$py.class
+#**/__pycache__
+#*.pyc
+#/daily_horoscopes/migrations/__pycache__
 # C extensions
 *.so
 
