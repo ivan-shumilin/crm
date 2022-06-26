@@ -114,6 +114,8 @@ def index(request):
             return render(request, 'index.html', {'formset': formset, 'formset_e': formset._errors})
         else:
             formset.save()
+            date_default = str(request.POST['datetime'])
+            queryset = Product.objects.filter(timetable__datetime=date_default)
 
     if request.method == 'POST' and 'find_date' in request.POST:
         form_date = TimetableForm(request.POST)

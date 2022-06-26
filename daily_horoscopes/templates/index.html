@@ -6,10 +6,10 @@
     {{ form_date.datetime }}
     <span>{{ error }}</span>
     <input name="find_date" class="btn btn-primary btn-lg btn-block" type="submit" value="Выбрать дату">
-</form>
-{{ formset_e }}
-{{ error.error_messages }}
-<form action="" method="post">
+
+    {{ formset_e }}
+    {{ error.error_messages }}
+
     {% csrf_token %}
     {{ formset.management_form }}
     {% for form in formset %}
