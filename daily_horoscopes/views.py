@@ -110,8 +110,8 @@ def index(request):
     if request.method == 'POST' and 'save' in request.POST:
         formset = ProductFormSet(request.POST, request.FILES, queryset=queryset, )
 
-        if formset.is_valid():
-            return render(request, 'index.html', {'formset': formset, 'error': 'error'})
+        if not formset.is_valid():
+            return render(request, 'index.html', {'formset': formset, 'formset_e': formset._errors})
         else:
             formset.save()
 
