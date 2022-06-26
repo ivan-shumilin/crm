@@ -127,6 +127,7 @@ def index(request):
                 'form_date': form_date,
                 'error': error,
                 'formset': formset,
+                'formset_e': formset._errors,
             }
             print('Hi!')
             return render(request, 'index.html', context=data)
@@ -139,6 +140,7 @@ def index(request):
             'form_date': form_date,
             'error': error,
             'formset': formset,
+            'formset_e': formset._errors
         }
     return render(request, 'index.html', context=data)
 
