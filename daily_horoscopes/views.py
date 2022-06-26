@@ -193,7 +193,7 @@ class BaseAPIView(APIView):
     def post(self, request):
         data = request.data
         data_str = str(data)
-        a = ' '
+
         data_dict = dict(data)
         data_dict = {
             'menu': {'id': 682, 'date': '26.06.2022', 'status': 'completed', 'completed_at': '22.06.2022 17:52:31',
