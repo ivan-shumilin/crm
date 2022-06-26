@@ -37,11 +37,11 @@ class Product(models.Model):
 
     def __str__(self):
         return f'{self.name}, {self.category}'
-
-
-class Timetable(models.Model):
-    datetime = models.DateField()
-    item = models.ForeignKey('Product', on_delete=models.SET_NULL, null=True)
-    date_create = models.DateField(default=date.today)
-    def __str__(self):
-        return f'{self.item}'
+#
+#
+# class Timetable(models.Model):
+#     datetime = models.DateField()
+#     item = models.ForeignKey('Product', on_delete=models.SET_NULL, null=True)
+#     date_create = models.DateField(default=date.today)
+#     def __str__(self):
+#         return f'{self.item}'

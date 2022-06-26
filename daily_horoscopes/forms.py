@@ -13,17 +13,17 @@ from django.contrib.auth.models import User
 from .models import *
 from django.forms import ModelForm, DateInput
 
-class TimetableForm(ModelForm):
-    class Meta:
-        model = Timetable
-        fields = ['datetime']
-
-        widgets = {
-            "datetime": DateInput(attrs={
-                'type': 'date',
-                'class': 'form-conrol',
-            })
-        }
+# class TimetableForm(ModelForm):
+#     class Meta:
+#         model = Timetable
+#         fields = ['datetime']
+#
+#         widgets = {
+#             "datetime": DateInput(attrs={
+#                 'type': 'date',
+#                 'class': 'form-conrol',
+#             })
+#         }
 
 
 class UserRegistrationForm(forms.ModelForm):
