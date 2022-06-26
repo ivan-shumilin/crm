@@ -7,6 +7,7 @@
     <span>{{ error }}</span>
     <input name="find_date" class="btn btn-primary btn-lg btn-block" type="submit" value="Выбрать дату">
 </form>
+{{ error }}
 <form action="" method="post">
     {% csrf_token %}
     {{ formset.management_form }}
