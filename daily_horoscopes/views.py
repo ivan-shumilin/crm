@@ -10,6 +10,7 @@ from rest_framework.views import APIView
 # from .serializers import ForecastSerializer
 import calendar, datetime
 from datetime import datetime
+from datetime import date
 from django.template import RequestContext
 
 import json
@@ -104,7 +105,8 @@ def index(request):
                                               'energy': Textarea(attrs={'style': "display: none;"}),
                                           },
                                           extra=0, )
-    queryset = Product.objects.filter(timetable__datetime='2022-06-26')
+    date_default = str(date.today())
+    queryset = Product.objects.filter(timetable__datetime=date_default)
     if request.method == 'POST' and 'save' in request.POST:
         formset = ProductFormSet(request.POST, request.FILES, queryset=queryset, )
 
@@ -117,6 +119,7 @@ def index(request):
         form_date = TimetableForm(request.POST)
         if form_date.is_valid():
             queryset = Product.objects.filter(timetable__datetime=str(form_date.cleaned_data["datetime"]))
+            date_default = str(form_date.cleaned_data["datetime"])
             formset = ProductFormSet(queryset=queryset)
             data = {
                 'form_date': form_date,
@@ -129,7 +132,7 @@ def index(request):
             error = 'Некорректные данные'
     else:
         formset = ProductFormSet(queryset=queryset)
-        form_date = TimetableForm()
+        form_date = TimetableForm(initial={'datetime': date_default})
         data = {
             'form_date': form_date,
             'error': error,
@@ -138,53 +141,7 @@ def index(request):
     return render(request, 'index.html', context=data)
 
 
-# class BaseAPIView(APIView):
-#     def post(self, request):
-#         data = request.data
-#         data_str = str(data)
-#         data_dict = dict(data)
-#         load_menu(data_dict)
-#         Base.objects.create(base=data_str)
-#         return Response(data)
 
-
-# def index(request):
-#     # if request.user.is_authenticated:
-#     ProductFormSet = modelformset_factory(Product,
-#                                           fields=(
-#                                               'iditem', 'name', 'description', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd',
-#                                               'vkd'),
-#                                           widgets={'ovd': CheckboxInput(
-#                                               attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-#                                               'shd': CheckboxInput(
-#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-#                                               'bd': CheckboxInput(
-#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-#                                               'vbd': CheckboxInput(
-#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-#                                               'nbd': CheckboxInput(
-#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-#                                               'nkd': CheckboxInput(
-#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-#                                               'vkd': CheckboxInput(
-#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-#                                               'name': Textarea(attrs={'style': "display: none;"}),
-#                                               'description': Textarea(attrs={'style': "display: none;"}),
-#                                               'iditem': Textarea(attrs={'style': "display: none;"}),
-#                                           },
-#                                           extra=0, )
-#     if request.method == 'POST':
-#         formset = ProductFormSet(request.POST, request.FILES)
-#         if not formset.is_valid():
-#             return render(request, 'index.html', {'formset': formset})
-#         else:
-#             formset.save()
-#     else:
-#         formset = ProductFormSet()
-#     return render(request, 'index.html', {'formset': formset})
-#
-#     # else:
-#     # return HttpResponseRedirect('accounts/login/')
 
 
 class BaseAPIView(APIView):
@@ -193,7 +150,7 @@ class BaseAPIView(APIView):
         data_str = str(data)
         data_dict = dict(data)
         # data_dict = {
-        #     'menu': {'id': 682, 'date': '26.06.2022', 'status': 'completed', 'completed_at': '22.06.2022 17:52:31',
+        #     'menu': {'id': 682, 'date': '27.06.2022', 'status': 'completed', 'completed_at': '22.06.2022 17:52:31',
         #              'created_at': '17.06.2022 10:26:17', 'combo_price': 350,
         #              'location': {'id': 4, 'name': 'hadassah', 'subdomain': 'hadassah'}, 'items': [
         #             {'id': 13276, 'combo': False,
@@ -455,3 +412,52 @@ def profile(request):
         template_name='profile.html',
         context=context
     )
+
+
+# class BaseAPIView(APIView):
+#     def post(self, request):
+#         data = request.data
+#         data_str = str(data)
+#         data_dict = dict(data)
+#         load_menu(data_dict)
+#         Base.objects.create(base=data_str)
+#         return Response(data)
+
+
+# def index(request):
+#     # if request.user.is_authenticated:
+#     ProductFormSet = modelformset_factory(Product,
+#                                           fields=(
+#                                               'iditem', 'name', 'description', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd',
+#                                               'vkd'),
+#                                           widgets={'ovd': CheckboxInput(
+#                                               attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+#                                               'shd': CheckboxInput(
+#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+#                                               'bd': CheckboxInput(
+#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+#                                               'vbd': CheckboxInput(
+#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+#                                               'nbd': CheckboxInput(
+#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+#                                               'nkd': CheckboxInput(
+#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+#                                               'vkd': CheckboxInput(
+#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+#                                               'name': Textarea(attrs={'style': "display: none;"}),
+#                                               'description': Textarea(attrs={'style': "display: none;"}),
+#                                               'iditem': Textarea(attrs={'style': "display: none;"}),
+#                                           },
+#                                           extra=0, )
+#     if request.method == 'POST':
+#         formset = ProductFormSet(request.POST, request.FILES)
+#         if not formset.is_valid():
+#             return render(request, 'index.html', {'formset': formset})
+#         else:
+#             formset.save()
+#     else:
+#         formset = ProductFormSet()
+#     return render(request, 'index.html', {'formset': formset})
+#
+#     # else:
+#     # return HttpResponseRedirect('accounts/login/')
