@@ -64,7 +64,7 @@ def load_menu(dict_tests):
                 lactose_free=menu_item['product']['lactose_free'],
                 sugarless=menu_item['product']['sugarless'],
                 gluten_free=menu_item['product']['gluten_free'],
-                description=menu_item['product']['description'],
+                description="Nofsdfsdfsdfsadfasdfsadfasdfasdfasdfasdfasdfasdf",
                 category=menu_item['category']['name']
             ))
     Product.objects.bulk_create(to_create)
