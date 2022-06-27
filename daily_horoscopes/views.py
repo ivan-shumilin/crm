@@ -36,12 +36,6 @@ def load_menu(dict_tests):
     menu_items = dict_tests['menu']['items']
     to_create = []
     for menu_item in menu_items:
-        if menu_item['product']['description'] == '':
-            menu_item['product']['description'] = 'Отсутствует'
-        if menu_item['product']['description'] == 'None':
-            menu_item['product']['description'] = 'Отсутствует'
-        if menu_item['product']['description'] == "":
-            menu_item['product']['description'] = 'Отсутствует'
         try:
             if len(menu_item['product']['description']) < 3:
                 menu_item['product']['description'] = 'Отсутствует'
@@ -64,7 +58,7 @@ def load_menu(dict_tests):
                 lactose_free=menu_item['product']['lactose_free'],
                 sugarless=menu_item['product']['sugarless'],
                 gluten_free=menu_item['product']['gluten_free'],
-                description="Nofsdfsdfsdfsadfasdfsadfasdfasdfasdfasdfasdfasdf",
+                description=menu_item['product']['description'],
                 category=menu_item['category']['name']
             ))
     Product.objects.bulk_create(to_create)
