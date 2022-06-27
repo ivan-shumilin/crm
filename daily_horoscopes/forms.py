@@ -25,6 +25,33 @@ class TimetableForm(ModelForm):
             })
         }
 
+# class ProductForm(forms.ModelForm):
+#     ovd = forms.CheckboxInput(attrs={'class': 'form-check-input', 'type': 'checkbox'})
+#     shd = forms.CheckboxInput(
+#         attrs={'class': 'form-check-input', 'type': 'checkbox'})
+#     bd = forms.CheckboxInput(
+#         attrs={'class': 'form-check-input', 'type': 'checkbox'})
+#     vbd = forms.CheckboxInput(
+#         attrs={'class': 'form-check-input', 'type': 'checkbox'})
+#     nbd = forms.CheckboxInput(
+#         attrs={'class': 'form-check-input', 'type': 'checkbox'})
+#     nkd = forms.CheckboxInput(
+#         attrs={'class': 'form-check-input', 'type': 'checkbox'})
+#     vkd = forms.CheckboxInput(
+#         attrs={'class': 'form-check-input', 'type': 'checkbox'})
+#     name = forms.CharField(widget=forms.TextInput(attrs={'style': "display: none;"}), required=False)
+#     description = forms.CharField(widget=forms.TextInput(attrs={'style': "display: none;"}), required=False)
+#     carbohydrate = forms.CharField(widget=forms.TextInput(attrs={'style': "display: none;"}), required=False)
+#     iditem = forms.CharField(widget=forms.TextInput(attrs={'style': "display: none;"}), required=False)
+#     fat = forms.CharField(widget=forms.TextInput(attrs={'style': "display: none;"}), required=False)
+#     fiber = forms.CharField(widget=forms.TextInput(attrs={'style': "display: none;"}), required=False)
+#     energy = forms.CharField(widget=forms.TextInput(attrs={'style': "display: none;"}), required=False)
+#
+#     class Meta:
+#         model = Product
+#         fields = ('iditem', 'name', 'description', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd',
+#                      'vkd', 'carbohydrate', 'fat', 'fiber', 'energy')
+
 
 class UserRegistrationForm(forms.ModelForm):
     username = forms.CharField(label='Username', widget=forms.TextInput(
