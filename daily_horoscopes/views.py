@@ -109,6 +109,7 @@ def index(request):
                                               'fat': Textarea(attrs={'style': "display: none;"}),
                                               'fiber': Textarea(attrs={'style': "display: none;"}),
                                               'energy': Textarea(attrs={'style': "display: none;"}),
+                                              'category': Textarea(attrs={'style': "display: none;"}),
                                           },
                                           extra=0, )
     date_default = str(date.today())

@@ -3,14 +3,21 @@
 
 <form action="" method="post">
     {% csrf_token %}
-    {{ form_date.datetime }}
-    <span>{{ error }}</span>
-    <input name="find_date" class="btn btn-primary btn-lg btn-block" type="submit" value="Выбрать дату">
+    <div class="row" style="margin-bottom: 50px">
+        <div class="col-12 col-md-2" style="
+    margin-top: 1px">{{ form_date.datetime }}</div>
+        <div class="col-12 col-md-2"><input  name="find_date" class="btn btn-primary btn-sm" type="submit" value="Выбрать дату"></div>
+        {% if errors %}
+            <div class="col-12 col-md-2" style="color: #ab2437;"><span>{{ error }}</span></div>
+        {% endif %}
+        {% if formset_e %}
+            <div class="col-12 col-md-2" style="color: #ab2437;"><span>{{ formset_e }}</span></div>
+        {% endif %}
+        {% if error.error_messages %}
+            <div class="col-12 col-md-2" style="color: #ab2437;"><span>{{ error.error_messages }}</span></div>
+        {% endif %}
+    </div>
 
-    {{ formset_e }}
-    {{ error.error_messages }}
-
-    {% csrf_token %}
     {{ formset.management_form }}
     {% for form in formset %}
     {{ form.iditem }}
@@ -23,9 +30,11 @@
     {{ form.energy }}
     {{ form.title }}
     {{ form.pub_date }}
+    {{ form.category }}
 
 
-    <div class="row">
+
+    <div class="row" >
         <div class="col-12 col-md-3">{{ form.name.value }}</div>
         <div class="col-12 col-md-1">
             <button type="button" class="btn btn-outline-primary" style="margin-bottom: 10px;" data-bs-toggle="modal"
