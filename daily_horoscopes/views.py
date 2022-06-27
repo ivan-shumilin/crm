@@ -42,6 +42,8 @@ def load_menu(dict_tests):
             menu_item['product']['description'] = 'Отсутствует'
         if menu_item['product']['description'] == "":
             menu_item['product']['description'] = 'Отсутствует'
+        if len(menu_item['product']['description']) == 0:
+            menu_item['product']['description'] = 'Отсутствует'
 
         if (len(Product.objects.filter(iditem=menu_item['product']['id'])) == 0) and (
                 len([item for item in to_create if item.iditem == menu_item['product']['id']]) == 0):
