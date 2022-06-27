@@ -84,10 +84,11 @@ def load_timetable(dict_tests):
 
 def index(request):
     error = ''
+    flag = True
     ProductFormSet = modelformset_factory(Product,
                                           fields=(
                                               'iditem', 'name', 'description', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd',
-                                              'vkd', 'carbohydrate', 'fat', 'fiber', 'energy',),
+                                              'vkd', 'carbohydrate', 'fat', 'fiber', 'energy', 'category'),
                                           widgets={'ovd': CheckboxInput(
                                               attrs={'class': 'form-check-input', 'type': 'checkbox'}),
                                               'shd': CheckboxInput(
@@ -144,6 +145,7 @@ def index(request):
         formset = ProductFormSet(queryset=queryset)
         form_date = TimetableForm(initial={'datetime': date_default})
         data = {
+            'flag': flag,
             'form_date': form_date,
             'error': error,
             'formset': formset,

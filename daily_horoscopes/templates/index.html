@@ -20,21 +20,23 @@
 
     {{ formset.management_form }}
     {% for form in formset %}
+
     {{ form.iditem }}
     {{ form.id }}
     {{ form.description }}
     {{ form.name }}
+    {{ form.names }}
     {{ form.fat }}
     {{ form.fiber }}
     {{ form.carbohydrate }}
     {{ form.energy }}
-    {{ form.title }}
-    {{ form.pub_date }}
     {{ form.category }}
 
 
 
     <div class="row" >
+
+
         <div class="col-12 col-md-3">{{ form.name.value }}</div>
         <div class="col-12 col-md-1">
             <button type="button" class="btn btn-outline-primary" style="margin-bottom: 10px;" data-bs-toggle="modal"
@@ -71,6 +73,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
+                        <p><strong>Категория</strong> {{ form.category.value }}</p>
+                        <hr>
                         <p><strong>Состав:</strong> {{ form.description.value|cut:"Состав:"|cut:"Состав"|cut:" :" }}</p>
                         <hr>
                         <p><strong>БЖУ:</strong> Белки - {{ form.fiber.value|floatformat  }} г, жиры - {{ form.fat.value|floatformat  }} г, углеводы - {{ form.carbohydrate.value|floatformat  }} г, ккал - {{ form.energy.value|floatformat  }}.</p>
@@ -83,8 +87,10 @@
                 </div>
             </div>
         </div>
+
     </div>
-    {% endfor %}
+
+{% endfor %}
     <input name="save" class="btn btn-primary btn-lg btn-block" type="submit" value="Сохранить">
 </form>
 
