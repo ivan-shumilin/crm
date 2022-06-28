@@ -121,8 +121,7 @@ def index1(request):
     else:
         formset_salad = ProductFormSet(queryset=queryset_salad, prefix='salad')
         formset_soup = ProductFormSet(queryset=queryset_soup, prefix='soup')
-    return render(request, 'index1.html', {'formset_salad': formset_salad,
-                                           'formset_soup': formset_soup,
+    return render(request, 'index1.html', {'formset_salad': formset_salad,'formset_soup': formset_soup,
                                            })
 
 def index(request):
@@ -160,40 +159,53 @@ def index(request):
     else:
         date_default = str(request.POST['datetime'])
 
-    queryset = Product.objects.filter(timetable__datetime=date_default)
-    if request.method == 'POST' and 'save' in request.POST:
-        formset = ProductFormSet(request.POST, request.FILES, queryset=queryset, )
 
-        if not formset.is_valid():
-            return render(request, 'index.html', {'formset': formset, 'formset_e': formset._errors})
+    queryset_salad = Product.objects.filter(timetable__datetime=date_default).filter(category='Салаты')
+    queryset_soup = Product.objects.filter(timetable__datetime=date_default).filter(category='Первые блюда')
+
+    if request.method == 'POST' and 'save' in request.POST:
+        formset_salad = ProductFormSet(request.POST, request.FILES, queryset=queryset_salad, prefix='salad')
+        formset_soup = ProductFormSet(request.POST, request.FILES, queryset=queryset_soup, prefix='soup')
+
+        if not formset_salad.is_valid() and not formset_soup.is_valid():
+            return render(request, 'index.html', {'formset_salad': formset_salad,'formset_soup': formset_soup, 'formset_e': formset._errors})
         else:
-            formset.save()
+            formset_salad.save()
+            formset_soup.save()
             date_default = str(request.POST['datetime'])
-            queryset = Product.objects.filter(timetable__datetime=date_default)
+            queryset_salad = Product.objects.filter(timetable__datetime=date_default).filter(category='Салаты')
+            queryset_soup = Product.objects.filter(timetable__datetime=date_default).filter(category='Первые блюда')
 
     if request.method == 'POST' and 'find_date' in request.POST:
         form_date = TimetableForm(request.POST)
         if form_date.is_valid():
-            queryset = Product.objects.filter(timetable__datetime=str(form_date.cleaned_data["datetime"]))
+
+            queryset_salad = Product.objects.filter(timetable__datetime=str(form_date.cleaned_data["datetime"])).filter(category='Салаты')
+            queryset_soup = Product.objects.filter(timetable__datetime=str(form_date.cleaned_data["datetime"])).filter(category='Первые блюда')
             date_default = str(form_date.cleaned_data["datetime"])
-            formset = ProductFormSet(queryset=queryset)
+            formset_salad = ProductFormSet(queryset=queryset_salad, prefix='salad')
+            formset_soup = ProductFormSet(queryset=queryset_soup, prefix='soup')
             data = {
                 'form_date': form_date,
                 'error': error,
-                'formset': formset,
-                'formset_e': formset._errors,
+                'formset_salad': formset_salad,
+                'formset_soup': formset_soup,
+                # 'formset_e': formset._errors,
             }
             return render(request, 'index.html', context=data)
         else:
             error = 'Некорректные данные'
     else:
-        formset = ProductFormSet(queryset=queryset)
+        formset_salad = ProductFormSet(queryset=queryset_salad, prefix='salad')
+        formset_soup = ProductFormSet(queryset=queryset_soup, prefix='soup')
+
         form_date = TimetableForm(initial={'datetime': date_default})
         data = {
             'form_date': form_date,
             'error': error,
-            'formset': formset,
-            'formset_e': formset._errors
+            'formset_salad': formset_salad,
+            'formset_soup': formset_soup,
+            # 'formset_e': formset._errors
         }
     return render(request, 'index.html', context=data)
 
