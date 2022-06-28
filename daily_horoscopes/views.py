@@ -113,7 +113,11 @@ def index(request):
                                               'category': Textarea(attrs={'style': "display: none;"}),
                                           },
                                           extra=0, )
-    date_default = str(date.today())
+    if request.method == 'GET':
+        date_default = str(date.today())
+    else:
+        date_default = str(request.POST['datetime'])
+
     queryset = Product.objects.filter(timetable__datetime=date_default)
     if request.method == 'POST' and 'save' in request.POST:
         formset = ProductFormSet(request.POST, request.FILES, queryset=queryset, )
