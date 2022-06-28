@@ -148,6 +148,150 @@
     </div>
 
 {% endfor %}
+    <h3>Горячие блюда</h3>
+
+{% for form in formset_soup %}
+
+    {{ form.iditem }}
+    {{ form.id }}
+    {{ form.description }}
+    {{ form.name }}
+    {{ form.names }}
+    {{ form.fat }}
+    {{ form.fiber }}
+    {{ form.carbohydrate }}
+    {{ form.energy }}
+    {{ form.category }}
+
+
+
+    <div class="row" >
+
+
+        <div class="col-12 col-md-3">{{ form.name.value }}</div>
+        <div class="col-12 col-md-1">
+            <button type="button" class="btn btn-outline-primary" style="margin-bottom: 10px;" data-bs-toggle="modal"
+                    data-bs-target="#modal-start{{ form.iditem.value }}">Состав
+            </button>
+        </div>
+
+        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 20px;">
+            {{ form.ovd }}
+            <label class="form-check-label">ОВД</label>
+        </div>
+        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 12px;">{{ form.shd }}
+            <label class="form-check-label">ЩД</label></div>
+        <div class=" col-4  col-md-1 form-check form-switch" style="margin-left: 12px;">{{ form.bd }}
+            <label class="form-check-label">БД</label></div>
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.vbd }}
+            <label class="form-check-label">ВБД</label></div>
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.nbd }}
+            <label class="form-check-label">НБД</label></div>
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.nkd }}
+            <label class="form-check-label">НКД</label></div>
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.vkd }}
+            <label class="form-check-label">ВКД</label></div>
+        <hr>
+
+
+        <div id="modal-start{{ form.iditem.value }}" class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ form.name.value }}</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Состав:</strong> {{ form.description.value|cut:"Состав:"|cut:"Состав"|cut:" :" }}</p>
+                        <hr>
+                        <p><strong>БЖУ:</strong> Белки - {{ form.fiber.value|floatformat  }} г, жиры - {{ form.fat.value|floatformat  }} г, углеводы - {{ form.carbohydrate.value|floatformat  }} г, ккал - {{ form.energy.value|floatformat  }}.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-close btn btn-secondary" data-bs-dismiss="modal"
+                                aria-label="Close">Закрыть
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endfor %}
+    <h3>Гарниры</h3>
+
+{% for form in formset_soup %}
+
+    {{ form.iditem }}
+    {{ form.id }}
+    {{ form.description }}
+    {{ form.name }}
+    {{ form.names }}
+    {{ form.fat }}
+    {{ form.fiber }}
+    {{ form.carbohydrate }}
+    {{ form.energy }}
+    {{ form.category }}
+
+
+
+    <div class="row" >
+
+
+        <div class="col-12 col-md-3">{{ form.name.value }}</div>
+        <div class="col-12 col-md-1">
+            <button type="button" class="btn btn-outline-primary" style="margin-bottom: 10px;" data-bs-toggle="modal"
+                    data-bs-target="#modal-start{{ form.iditem.value }}">Состав
+            </button>
+        </div>
+
+        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 20px;">
+            {{ form.ovd }}
+            <label class="form-check-label">ОВД</label>
+        </div>
+        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 12px;">{{ form.shd }}
+            <label class="form-check-label">ЩД</label></div>
+        <div class=" col-4  col-md-1 form-check form-switch" style="margin-left: 12px;">{{ form.bd }}
+            <label class="form-check-label">БД</label></div>
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.vbd }}
+            <label class="form-check-label">ВБД</label></div>
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.nbd }}
+            <label class="form-check-label">НБД</label></div>
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.nkd }}
+            <label class="form-check-label">НКД</label></div>
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.vkd }}
+            <label class="form-check-label">ВКД</label></div>
+        <hr>
+
+
+        <div id="modal-start{{ form.iditem.value }}" class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ form.name.value }}</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Состав:</strong> {{ form.description.value|cut:"Состав:"|cut:"Состав"|cut:" :" }}</p>
+                        <hr>
+                        <p><strong>БЖУ:</strong> Белки - {{ form.fiber.value|floatformat  }} г, жиры - {{ form.fat.value|floatformat  }} г, углеводы - {{ form.carbohydrate.value|floatformat  }} г, ккал - {{ form.energy.value|floatformat  }}.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-close btn btn-secondary" data-bs-dismiss="modal"
+                                aria-label="Close">Закрыть
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endfor %}
     <input name="save" class="btn btn-primary btn-lg btn-block" type="submit" value="Сохранить">
 </form>
 
