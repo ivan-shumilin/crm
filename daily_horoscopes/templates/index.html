@@ -1,12 +1,12 @@
 {% extends "base_generic.html" %}
 {% block content %}
 
-<form action="" method="post">
+<form style='padding-left: 0px; padding-right: 0px;' action="" method="post">
     {% csrf_token %}
     <div class="row" style="margin-bottom: 50px">
-        <div class="col-12 col-md-2" style="
+        <div class="col-6 col-md-2" style="
     margin-top: 1px">{{ form_date.datetime }}</div>
-        <div class="col-12 col-md-2"><input  name="find_date" class="btn btn-primary btn-sm" type="submit" value="Выбрать дату"></div>
+        <div class="col-6 col-md-2"><input  name="find_date" class="btn btn-primary btn-sm" type="submit" value="Выбрать дату"></div>
         {% if errors %}
             <div class="col-12 col-md-2" style="color: #ab2437;"><span>{{ error }}</span></div>
         {% endif %}
@@ -19,7 +19,8 @@
     {{ formset_soup.management_form }}
     {{ formset_main_dishes.management_form }}
     {{ formset_side_dishes.management_form }}
-    <h3>Салаты</h3>
+    <h4>Салаты</h4>
+    <div style="margin-bottom: 30px;">
     {% for form in formset_salad %}
 
     {{ form.iditem }}
@@ -35,33 +36,33 @@
 
 
 
-    <div class="row" >
+    <div class="row"  >
 
 
         <div class="col-12 col-md-3">{{ form.name.value }}</div>
-        <div class="col-12 col-md-1">
+        <div class="col-12 col-md-1" style="margin-right: 20px;">
             <button type="button" class="btn btn-outline-primary" style="margin-bottom: 10px;" data-bs-toggle="modal"
                     data-bs-target="#modal-start{{ form.iditem.value }}">Состав
             </button>
         </div>
 
-        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 20px;">
+        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 1px;">
             {{ form.ovd }}
             <label class="form-check-label">ОВД</label>
         </div>
-        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 12px;">{{ form.shd }}
+        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 1px;">{{ form.shd }}
             <label class="form-check-label">ЩД</label></div>
-        <div class=" col-4  col-md-1 form-check form-switch" style="margin-left: 12px;">{{ form.bd }}
+        <div class=" col-4  col-md-1 form-check form-switch" style="margin-left: 1px;">{{ form.bd }}
             <label class="form-check-label">БД</label></div>
-        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.vbd }}
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 1px;">{{ form.vbd }}
             <label class="form-check-label">ВБД</label></div>
-        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.nbd }}
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 1px;">{{ form.nbd }}
             <label class="form-check-label">НБД</label></div>
-        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.nkd }}
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 1px;">{{ form.nkd }}
             <label class="form-check-label">НКД</label></div>
-        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.vkd }}
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 1px;">{{ form.vkd }}
             <label class="form-check-label">ВКД</label></div>
-        <hr>
+        <hr style="opacity: 0.11">
 
 
         <div id="modal-start{{ form.iditem.value }}" class="modal" tabindex="-1">
@@ -90,8 +91,9 @@
     </div>
 
 {% endfor %}
-    <h3>Супы</h3>
-
+    </div>
+    <h4>Супы</h4>
+<div style="margin-bottom: 30px;">
 {% for form in formset_soup %}
 
     {{ form.iditem }}
@@ -111,29 +113,29 @@
 
 
         <div class="col-12 col-md-3">{{ form.name.value }}</div>
-        <div class="col-12 col-md-1">
+        <div class="col-12 col-md-1" style="margin-right: 20px;">
             <button type="button" class="btn btn-outline-primary" style="margin-bottom: 10px;" data-bs-toggle="modal"
                     data-bs-target="#modal-start{{ form.iditem.value }}">Состав
             </button>
         </div>
 
-        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 20px;">
+        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 12px;">
             {{ form.ovd }}
             <label class="form-check-label">ОВД</label>
         </div>
-        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 12px;">{{ form.shd }}
+        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 1px;">{{ form.shd }}
             <label class="form-check-label">ЩД</label></div>
-        <div class=" col-4  col-md-1 form-check form-switch" style="margin-left: 12px;">{{ form.bd }}
+        <div class=" col-4  col-md-1 form-check form-switch" style="margin-left: 1px;">{{ form.bd }}
             <label class="form-check-label">БД</label></div>
-        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.vbd }}
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 1px;">{{ form.vbd }}
             <label class="form-check-label">ВБД</label></div>
-        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.nbd }}
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 1px;">{{ form.nbd }}
             <label class="form-check-label">НБД</label></div>
-        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.nkd }}
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 1px;">{{ form.nkd }}
             <label class="form-check-label">НКД</label></div>
-        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.vkd }}
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 1px;">{{ form.vkd }}
             <label class="form-check-label">ВКД</label></div>
-        <hr>
+        <hr style="opacity: 0.11">
 
 
         <div id="modal-start{{ form.iditem.value }}" class="modal" tabindex="-1">
@@ -162,8 +164,9 @@
     </div>
 
 {% endfor %}
-        <h3>Горячие блюда</h3>
-
+</div>
+        <h4>Горячие блюда</h4>
+<div style="margin-bottom: 30px;">
 {% for form in formset_main_dishes %}
 
     {{ form.iditem }}
@@ -183,29 +186,29 @@
 
 
         <div class="col-12 col-md-3">{{ form.name.value }}</div>
-        <div class="col-12 col-md-1">
+        <div class="col-12 col-md-1" style="margin-right: 20px;">
             <button type="button" class="btn btn-outline-primary" style="margin-bottom: 10px;" data-bs-toggle="modal"
                     data-bs-target="#modal-start{{ form.iditem.value }}">Состав
             </button>
         </div>
 
-        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 20px;">
+        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 12px;">
             {{ form.ovd }}
             <label class="form-check-label">ОВД</label>
         </div>
-        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 12px;">{{ form.shd }}
+        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 1px;">{{ form.shd }}
             <label class="form-check-label">ЩД</label></div>
-        <div class=" col-4  col-md-1 form-check form-switch" style="margin-left: 12px;">{{ form.bd }}
+        <div class=" col-4  col-md-1 form-check form-switch" style="margin-left: 1px;">{{ form.bd }}
             <label class="form-check-label">БД</label></div>
-        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.vbd }}
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 1px;">{{ form.vbd }}
             <label class="form-check-label">ВБД</label></div>
-        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.nbd }}
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 1px;">{{ form.nbd }}
             <label class="form-check-label">НБД</label></div>
-        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.nkd }}
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 1px;">{{ form.nkd }}
             <label class="form-check-label">НКД</label></div>
-        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.vkd }}
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 1px;">{{ form.vkd }}
             <label class="form-check-label">ВКД</label></div>
-        <hr>
+        <hr style="opacity: 0.11">
 
 
         <div id="modal-start{{ form.iditem.value }}" class="modal" tabindex="-1">
@@ -234,8 +237,9 @@
     </div>
 
 {% endfor %}
-    <h3>Гарниры</h3>
-
+</div>
+    <h4>Гарниры</h4>
+<div style="margin-bottom: 30px;">
 {% for form in formset_side_dishes %}
 
     {{ form.iditem }}
@@ -255,29 +259,29 @@
 
 
         <div class="col-12 col-md-3">{{ form.name.value }}</div>
-        <div class="col-12 col-md-1">
+        <div class="col-12 col-md-1" style="margin-right: 20px;">
             <button type="button" class="btn btn-outline-primary" style="margin-bottom: 10px;" data-bs-toggle="modal"
                     data-bs-target="#modal-start{{ form.iditem.value }}">Состав
             </button>
         </div>
 
-        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 20px;">
+        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 1px;">
             {{ form.ovd }}
             <label class="form-check-label">ОВД</label>
         </div>
-        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 12px;">{{ form.shd }}
+        <div class=" col-2  col-md-1 form-check form-switch" style="margin-left: 1px;">{{ form.shd }}
             <label class="form-check-label">ЩД</label></div>
-        <div class=" col-4  col-md-1 form-check form-switch" style="margin-left: 12px;">{{ form.bd }}
+        <div class=" col-4  col-md-1 form-check form-switch" style="margin-left: 1px;">{{ form.bd }}
             <label class="form-check-label">БД</label></div>
-        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.vbd }}
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 1px;">{{ form.vbd }}
             <label class="form-check-label">ВБД</label></div>
-        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.nbd }}
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 1px;">{{ form.nbd }}
             <label class="form-check-label">НБД</label></div>
-        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.nkd }}
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 1px;">{{ form.nkd }}
             <label class="form-check-label">НКД</label></div>
-        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 12px;">{{ form.vkd }}
+        <div class=" col-4  col-md-1  form-check form-switch" style="margin-left: 1px;">{{ form.vkd }}
             <label class="form-check-label">ВКД</label></div>
-        <hr>
+        <hr style="opacity: 0.11">
 
 
         <div id="modal-start{{ form.iditem.value }}" class="modal" tabindex="-1">
@@ -306,6 +310,7 @@
     </div>
 
 {% endfor %}
+</div>
     <input name="save" class="btn btn-primary btn-lg btn-block" type="submit" value="Сохранить">
 </form>
 
