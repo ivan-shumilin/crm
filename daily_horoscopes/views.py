@@ -81,6 +81,56 @@ def load_timetable(dict_tests):
     Timetable.objects.bulk_create(to_create)
 
 
+def index1(request):
+    ProductFormSet = modelformset_factory(Product,
+                                          fields=(
+                                          'iditem', 'name', 'description', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd',
+                                          'vkd'),
+                                          widgets={'ovd': CheckboxInput(
+                                              attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+                                              'shd': CheckboxInput(
+                                                  attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+                                              'bd': CheckboxInput(
+                                                  attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+                                              'vbd': CheckboxInput(
+                                                  attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+                                              'nbd': CheckboxInput(
+                                                  attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+                                              'nkd': CheckboxInput(
+                                                  attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+                                              'vkd': CheckboxInput(
+                                                  attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+                                              'name': Textarea(attrs={'style': "display: none;"}),
+                                              'description': Textarea(attrs={'style': "display: none;"}),
+                                              'iditem': Textarea(attrs={'style': "display: none;"}),
+                                              'category': Textarea(attrs={'style': "display: none;"}),
+                                          },
+                                          extra=0, )
+    queryset_salad = Product.objects.filter(category='Салаты')
+    queryset_soup = Product.objects.filter(category='Первые блюда')
+    if request.method == 'POST':
+        formset = ProductFormSet(request.POST, request.FILES)
+        formset_salad = ProductFormSet(request.POST, request.FILES, queryset=queryset_salad, prefix='salad')
+        formset_soup = ProductFormSet(request.POST, request.FILES, queryset=queryset_soup, prefix='soup')
+        if not formset.is_valid() and not formset_salad.is_valid() and not formset_soup.is_valid():
+            return render(request, 'index1.html', {'formset': formset,
+                                                  'formset_salad': formset_salad,
+                                                  'formset_soup': formset_soup,
+                                                  })
+        else:
+            formset.save()
+            formset_salad.save()
+            formset_soup.save()
+    else:
+        formset = ProductFormSet()
+
+        formset_salad = ProductFormSet(queryset=queryset_salad, prefix='salad')
+        formset_soup = ProductFormSet(queryset=queryset_soup, prefix='soup')
+    return render(request, 'index1.html', {'formset': formset,
+                                           'formset_salad': formset_salad,
+                                           'formset_soup': formset_soup,
+                                           })
+
 def index(request):
     error = ''
     ProductFormSet = modelformset_factory(Product,
