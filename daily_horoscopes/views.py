@@ -7,7 +7,6 @@ from django.forms import modelformset_factory
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
-# from .serializers import ForecastSerializer
 import calendar, datetime
 from datetime import datetime
 from datetime import date
@@ -26,7 +25,7 @@ from django.contrib.auth import authenticate, login
 from django.forms import CheckboxInput, Textarea
 
 
-@transaction.atomic  # инструмент управления транзакциями базы данных
+@transaction.atomic
 def load_menu(dict_tests):
     # Product.objects.all().delete()
     # Timetable.objects.all().delete()
@@ -84,7 +83,6 @@ def load_timetable(dict_tests):
 
 def index(request):
     error = ''
-    flag = True
     ProductFormSet = modelformset_factory(Product,
                                           fields=(
                                               'iditem', 'name', 'description', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd',
@@ -141,7 +139,6 @@ def index(request):
                 'formset': formset,
                 'formset_e': formset._errors,
             }
-            print('Hi!')
             return render(request, 'index.html', context=data)
         else:
             error = 'Некорректные данные'
@@ -429,52 +426,3 @@ def profile(request):
         template_name='profile.html',
         context=context
     )
-
-
-# class BaseAPIView(APIView):
-#     def post(self, request):
-#         data = request.data
-#         data_str = str(data)
-#         data_dict = dict(data)
-#         load_menu(data_dict)
-#         Base.objects.create(base=data_str)
-#         return Response(data)
-
-
-# def index(request):
-#     # if request.user.is_authenticated:
-#     ProductFormSet = modelformset_factory(Product,
-#                                           fields=(
-#                                               'iditem', 'name', 'description', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd',
-#                                               'vkd'),
-#                                           widgets={'ovd': CheckboxInput(
-#                                               attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-#                                               'shd': CheckboxInput(
-#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-#                                               'bd': CheckboxInput(
-#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-#                                               'vbd': CheckboxInput(
-#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-#                                               'nbd': CheckboxInput(
-#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-#                                               'nkd': CheckboxInput(
-#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-#                                               'vkd': CheckboxInput(
-#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-#                                               'name': Textarea(attrs={'style': "display: none;"}),
-#                                               'description': Textarea(attrs={'style': "display: none;"}),
-#                                               'iditem': Textarea(attrs={'style': "display: none;"}),
-#                                           },
-#                                           extra=0, )
-#     if request.method == 'POST':
-#         formset = ProductFormSet(request.POST, request.FILES)
-#         if not formset.is_valid():
-#             return render(request, 'index.html', {'formset': formset})
-#         else:
-#             formset.save()
-#     else:
-#         formset = ProductFormSet()
-#     return render(request, 'index.html', {'formset': formset})
-#
-#     # else:
-#     # return HttpResponseRedirect('accounts/login/')
