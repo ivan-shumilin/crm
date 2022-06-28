@@ -146,7 +146,6 @@ def index(request):
         formset = ProductFormSet(queryset=queryset)
         form_date = TimetableForm(initial={'datetime': date_default})
         data = {
-            'flag': flag,
             'form_date': form_date,
             'error': error,
             'formset': formset,
