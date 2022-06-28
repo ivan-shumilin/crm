@@ -109,25 +109,19 @@ def index1(request):
     queryset_salad = Product.objects.filter(category='Салаты')
     queryset_soup = Product.objects.filter(category='Первые блюда')
     if request.method == 'POST':
-        formset = ProductFormSet(request.POST, request.FILES)
         formset_salad = ProductFormSet(request.POST, request.FILES, queryset=queryset_salad, prefix='salad')
         formset_soup = ProductFormSet(request.POST, request.FILES, queryset=queryset_soup, prefix='soup')
-        if not formset.is_valid() and not formset_salad.is_valid() and not formset_soup.is_valid():
-            return render(request, 'index1.html', {'formset': formset,
-                                                  'formset_salad': formset_salad,
+        if not formset_salad.is_valid() and not formset_soup.is_valid():
+            return render(request, 'index1.html', {'formset_salad': formset_salad,
                                                   'formset_soup': formset_soup,
                                                   })
         else:
-            formset.save()
             formset_salad.save()
             formset_soup.save()
     else:
-        formset = ProductFormSet()
-
         formset_salad = ProductFormSet(queryset=queryset_salad, prefix='salad')
         formset_soup = ProductFormSet(queryset=queryset_soup, prefix='soup')
-    return render(request, 'index1.html', {'formset': formset,
-                                           'formset_salad': formset_salad,
+    return render(request, 'index1.html', {'formset_salad': formset_salad,
                                            'formset_soup': formset_soup,
                                            })
 
