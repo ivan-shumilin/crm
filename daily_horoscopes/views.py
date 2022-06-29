@@ -230,7 +230,7 @@ def index(request):
         formset_salad = ProductFormSet(queryset=queryset_salad, prefix='salad')
         formset_soup = ProductFormSet(queryset=queryset_soup, prefix='soup')
         formset_main_dishes = ProductFormSet(queryset=queryset_salad, prefix='main_dishes')
-        formset_side_dishes = ProductFormSet(queryset=queryset_soup, prefix='side_dishes')
+        formset_side_dishes = ProductFormSet(queryset=queryset_side_dishes, prefix='side_dishes')
 
         form_date = TimetableForm(initial={'datetime': date_default})
         data = {
