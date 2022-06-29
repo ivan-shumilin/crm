@@ -4,8 +4,7 @@
 <form style='padding-left: 0px; padding-right: 0px;' action="" method="post">
     {% csrf_token %}
     <div class="row" style="margin-bottom: 50px">
-        <div class="col-6 col-md-2" style="
-    margin-top: 1px">{{ form_date.datetime }}</div>
+        <div class="col-6 col-md-2" style="margin-top: 1px">{{ form_date.datetime }}</div>
         <div class="col-6 col-md-2"><input  name="find_date" class="btn btn-primary btn-sm" type="submit" value="Выбрать дату"></div>
         {% if errors %}
             <div class="col-12 col-md-2" style="color: #ab2437;"><span>{{ error }}</span></div>

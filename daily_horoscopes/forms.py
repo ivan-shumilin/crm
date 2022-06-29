@@ -73,12 +73,11 @@ class UserRegistrationForm(forms.ModelForm):
             raise forms.ValidationError('Пароли не совпадают.')
         return cd['password2']
 
-
 class UserloginForm(forms.ModelForm):
     username = forms.CharField(label='Username', widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Имя пользователя'}))
     password = forms.CharField(label='Password',
-                               widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Пароль'}))
+                               widget=forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Пароль', 'style': 'margin-top: 10px;'}))
 
     # attrs = {'class': 'form-control'}
     class Meta:

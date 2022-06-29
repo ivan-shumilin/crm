@@ -9,6 +9,6 @@ urlpatterns = [
     path('test/', views.index1, name='index1'),
     # path('test/', views.index1, name='index1'),
     # path('form/', views.form, name='form'),
-    path('register/', views.register, name='register'),
+    # path('register/', views.register, name='register'),
     path('accounts/login/', views.user_login, name='login'),
 ]

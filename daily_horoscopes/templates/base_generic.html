@@ -23,9 +23,7 @@
         </li>
       {% if user.is_authenticated %}
         <li class="nav-item px-2 text-white nav-link mr-2">{{ user }}</li>
-        <li class="nav-item px-2">
-          <a class="nav-link text-white" href="{% url 'login' %}">Получить токен</a>
-        </li>
+
         <li class="nav-item px-2">
           <a class="nav-link text-white" href="{% url 'logout' %}">Выйти</a>
         </li>
@@ -33,9 +31,7 @@
         <li class="nav-item px-2">
           <a class="nav-link text-white" href="{% url 'login' %}">Войти</a>
         </li>
-        <li class="nav-item px-2">
-          <a class="nav-link text-white" href="{% url 'register' %}">Регистрация</a>
-        </li>
+
       {% endif %}
       </ul>
     </div>

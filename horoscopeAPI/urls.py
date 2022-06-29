@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('daily_horoscopes.urls')),
     path('api/v1/auth/', include('djoser.urls')),
-    re_path('auth/', include('djoser.urls.authtoken')),
+    # re_path('auth/', include('djoser.urls.authtoken')),
     path('api/v1/baselist/', BaseAPIView.as_view()),
 
 ]

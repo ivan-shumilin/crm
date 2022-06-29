@@ -23,6 +23,7 @@ from rest_framework.authtoken.models import Token
 from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate, login
 from django.forms import CheckboxInput, Textarea
+from django.contrib.auth.decorators import login_required
 
 
 @transaction.atomic
@@ -125,6 +126,8 @@ def index1(request):
                                            })
 
 
+
+@login_required
 def index(request):
     error = ''
     ProductFormSet = modelformset_factory(Product,
@@ -441,55 +444,55 @@ class BaseAPIView(APIView):
         Base.objects.create(base=data_str)
         return Response(data)
 
-
-def register(request):
-    """ Регистрация нового пользователя"""
-    errors = []
-    if request.method == 'POST':
-        user_form = UserRegistrationForm(request.POST)
-        if user_form.is_valid():
-            # делаем запрос на регистрацию нового пользователя (DRF)
-            url = 'https://intense-badlands-65950.herokuapp.com/api/v1/auth/users/'
-            headers = {'content-type': 'application/json'}
-            payload = {
-                'email': user_form.cleaned_data['email'],
-                'username': user_form.cleaned_data['username'],
-                'password': user_form.cleaned_data['password'],
-            }
-            response = requests.post(url, headers=headers, json=payload).json()
-
-            if payload['username'] == response.get(
-                    'username'):  # если имя пользователя есть в ответе регестрация прошла успешно
-                return render(request, 'registration/register_done.html', {'new_user': user_form.cleaned_data})
-            else:
-                errors = list(response.values())
-    else:
-        user_form = UserRegistrationForm()
-    return render(request, 'registration/register.html', {'user_form': user_form, 'errors': errors})
-
-
-def get_token(username, password):
-    response = {
-        'token': None,
-        'error': None
-    }
-    url = 'https://intense-badlands-65950.herokuapp.com/auth/token/login/'
-    headers = {'content-type': 'application/json'}
-    payload = {
-        'username': username,
-        'password': password,
-
-    }
-    response_on_json = requests.post(url, headers=headers, json=payload)
-    response_on_python = response_on_json.json()
-    if response_on_python.get("auth_token"):
-        if len(response_on_python["auth_token"]) != 40:
-            response['error'] = response_on_python["auth_token"]
-        else:
-            response['token'] = response_on_python["auth_token"]
-    return response
-
-
+#
+# def register(request):
+#     """ Регистрация нового пользователя"""
+#     errors = []
+#     if request.method == 'POST':
+#         user_form = UserRegistrationForm(request.POST)
+#         if user_form.is_valid():
+#             # делаем запрос на регистрацию нового пользователя (DRF)
+#             url = 'https://intense-badlands-65950.herokuapp.com/api/v1/auth/users/'
+#             headers = {'content-type': 'application/json'}
+#             payload = {
+#                 'email': user_form.cleaned_data['email'],
+#                 'username': user_form.cleaned_data['username'],
+#                 'password': user_form.cleaned_data['password'],
+#             }
+#             response = requests.post(url, headers=headers, json=payload).json()
+#
+#             if payload['username'] == response.get(
+#                     'username'):  # если имя пользователя есть в ответе регестрация прошла успешно
+#                 return render(request, 'registration/register_done.html', {'new_user': user_form.cleaned_data})
+#             else:
+#                 errors = list(response.values())
+#     else:
+#         user_form = UserRegistrationForm()
+#     return render(request, 'registration/register.html', {'user_form': user_form, 'errors': errors})
+#
+#
+# def get_token(username, password):
+#     response = {
+#         'token': None,
+#         'error': None
+#     }
+#     url = 'https://intense-badlands-65950.herokuapp.com/auth/token/login/'
+#     headers = {'content-type': 'application/json'}
+#     payload = {
+#         'username': username,
+#         'password': password,
+#
+#     }
+#     response_on_json = requests.post(url, headers=headers, json=payload)
+#     response_on_python = response_on_json.json()
+#     if response_on_python.get("auth_token"):
+#         if len(response_on_python["auth_token"]) != 40:
+#             response['error'] = response_on_python["auth_token"]
+#         else:
+#             response['token'] = response_on_python["auth_token"]
+#     return response
+#
+#
 def user_login(request):
     errors = None
     if request.method == 'POST':
@@ -498,18 +501,18 @@ def user_login(request):
                             password=user_form.data['password'])
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse('app_name:index'))
+            return HttpResponseRedirect('/')
         else:
             errors = 'Пользователя с таким именем и паролем не существует'
     else:
         user_form = UserloginForm()
     return render(request, 'registration/login.html', {'user_form': user_form,
                                                        'errors': errors})
-
-
-def profile(request):
-    return render(
-        request=request,
-        template_name='profile.html',
-        context=context
-    )
+#
+#
+# def profile(request):
+#     return render(
+#         request=request,
+#         template_name='profile.html',
+#         context=context
+#     )
