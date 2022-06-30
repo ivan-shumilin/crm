@@ -27,6 +27,7 @@ class Product(models.Model):
     gluten_free = models.BooleanField(null=True)
     description = models.CharField(max_length=1000, null=True)
     ovd = models.BooleanField(null=True)
+    ovd_sugarless = models.BooleanField(null=True)
     shd = models.BooleanField(null=True)
     bd = models.BooleanField(null=True)
     vbd = models.BooleanField(null=True)

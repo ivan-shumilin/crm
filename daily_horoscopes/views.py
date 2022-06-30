@@ -176,10 +176,12 @@ def index(request):
     error = ''
     ProductFormSet = modelformset_factory(Product,
                                           fields=(
-                                              'iditem', 'name', 'description', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd',
+                                              'iditem', 'name', 'description', 'ovd', 'ovd_sugarless', 'shd', 'bd', 'vbd', 'nbd', 'nkd',
                                               'vkd', 'carbohydrate', 'fat', 'fiber', 'energy', 'category'),
                                           widgets={'ovd': CheckboxInput(
                                               attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+                                              'ovd_sugarless': CheckboxInput(
+                                                  attrs={'class': 'form-check-input', 'type': 'checkbox'}),
                                               'shd': CheckboxInput(
                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
                                               'bd': CheckboxInput(
