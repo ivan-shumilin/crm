@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .models import Base, Product, Timetable
 from .forms import UserRegistrationForm, UserloginForm, TimetableForm
 from django.forms import modelformset_factory
+from .serializers import ProductSerializer
 
 from rest_framework import generics
 from rest_framework.response import Response
@@ -24,6 +25,48 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth import authenticate, login
 from django.forms import CheckboxInput, Textarea
 from django.contrib.auth.decorators import login_required
+import os
+import requests
+from rest_framework.renderers import JSONRenderer
+
+URL = 'https://cloud-api.yandex.net/v1/disk/resources'
+TOKEN = 'AQAAAAAnzmiwAAgF_TNw9en0lUKImDw8u7S2eQk'
+headers = {'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': f'OAuth {TOKEN}'}
+
+
+def create_backup():
+    queryset = Product.objects.all()
+    serializer_for_queryset = ProductSerializer(queryset, many=True).data
+    data = JSONRenderer().render(serializer_for_queryset).decode()
+    name = str(date.today()) + '.json'
+    with open(name, 'w', encoding='utf-8') as outfile:
+        json.dump(data, outfile, ensure_ascii=False)
+
+
+def create_folder(path):
+    """Создание папки. \n path: Путь к создаваемой папке."""
+    requests.put(f'{URL}?path={path}', headers=headers)
+
+
+def upload_file(loadfile, savefile, replace=False):
+    """Загрузка файла.
+    loadfile: Путь к загружаемому файлу
+    savefile: Путь к файлу на Диске
+    replace: true or false Замена файла на Диске"""
+
+    res = requests.get(f'{URL}/upload?path={savefile}&overwrite={replace}', headers=headers).json()
+    with open(loadfile, 'rb') as f:
+        try:
+            requests.put(res['href'], files={'file': f})
+        except KeyError:
+            print(res)
+
+
+def backup(request):
+    create_backup()
+    create_folder('backup' + '/' + str(date.today()))
+    upload_file(str(date.today()) + '.json', 'backup' + '/' + str(date.today()) + '/' + str(date.today()) + '.json')
+    return render(request, 'backup.html', {})
 
 
 @transaction.atomic
@@ -126,9 +169,10 @@ def index1(request):
                                            })
 
 
-
 @login_required
 def index(request):
+    # upload_file('daily_horoscopes/backup.json', 'test/backup.json', replace=False)
+
     error = ''
     ProductFormSet = modelformset_factory(Product,
                                           fields=(
@@ -208,9 +252,11 @@ def index(request):
                 category='Салаты')
             queryset_soup = Product.objects.filter(timetable__datetime=str(form_date.cleaned_data["datetime"])).filter(
                 category='Первые блюда')
-            queryset_main_dishes = Product.objects.filter(timetable__datetime=str(form_date.cleaned_data["datetime"])).filter(
+            queryset_main_dishes = Product.objects.filter(
+                timetable__datetime=str(form_date.cleaned_data["datetime"])).filter(
                 category='Вторые блюда')
-            queryset_side_dishes = Product.objects.filter(timetable__datetime=str(form_date.cleaned_data["datetime"])).filter(category='Гарниры')
+            queryset_side_dishes = Product.objects.filter(
+                timetable__datetime=str(form_date.cleaned_data["datetime"])).filter(category='Гарниры')
 
             date_default = str(form_date.cleaned_data["datetime"])
             formset_salad = ProductFormSet(queryset=queryset_salad, prefix='salad')
@@ -443,6 +489,7 @@ class BaseAPIView(APIView):
         load_timetable(data_dict)
         Base.objects.create(base=data_str)
         return Response(data)
+
 
 #
 # def register(request):

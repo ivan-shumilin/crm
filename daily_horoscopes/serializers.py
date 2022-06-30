@@ -1,14 +1,11 @@
-# import io
-#
-# from rest_framework import serializers
-# from .models import Forecast
-#
-#
-# class ForecastSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Forecast
-#         fields = ("sing", "description", "date_create")
+import io
 
-# class ForecastSerializer(serializers.Serializer):
-#     sing = serializers.CharField(max_length=5000)
-#     description = serializers.CharField(max_length=5000)
+from rest_framework import serializers
+from .models import Product
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ('iditem', 'name', 'description', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd',
+            'vkd', 'carbohydrate', 'fat', 'fiber', 'energy', 'category')

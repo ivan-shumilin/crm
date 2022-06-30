@@ -27,6 +27,11 @@
         <li class="nav-item px-2">
           <a class="nav-link text-white" href="{% url 'logout' %}">Выйти</a>
         </li>
+        {% if user.is_staff %}
+        <li class="nav-item px-2">
+          <a class="nav-link text-white" href="{% url 'backup' %}">Backup</a>
+        </li>
+        {% endif %}
       {% else %}
         <li class="nav-item px-2">
           <a class="nav-link text-white" href="{% url 'login' %}">Войти</a>
