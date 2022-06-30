@@ -46,3 +46,22 @@ class Timetable(models.Model):
     date_create = models.DateField(default=date.today, null=True)
     def __str__(self):
         return f'{self.item}'
+#
+# class Patient(models.Model):
+#     name = models.CharField(max_length=200, null=True)
+#     LOAN_STATUS = (
+#         ('ОВД', 'ОВД'),
+#         ('ЩД', 'ЩД'),
+#         ('БД', 'БД'),
+#         ('ВКД', 'ВКД'),
+#     )
+#
+#     type_of_diet = models.CharField(
+#         max_length=1,
+#         choices=LOAN_STATUS,
+#         blank=True,
+#         default='ОВД',
+#         help_text='Book availability')
+#
+#     def __str__(self):
+#         return f'{self.item}'
