@@ -12,7 +12,7 @@ class ProductAdmin(admin.ModelAdmin):
 
 class TimetableAdmin(admin.ModelAdmin):
     list_display = ('item', 'datetime',)
-    list_filter = ('datetime')
+    list_filter = ('datetime',)
 
 
 admin.site.register(Timetable, TimetableAdmin)
