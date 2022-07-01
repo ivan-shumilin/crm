@@ -12,6 +12,12 @@
         {% if error.error_messages %}
             <div class="col-12 col-md-2" style="color: #ab2437;"><span>{{ error.error_messages }}</span></div>
         {% endif %}
+         <div class="col-6" style="margin-top: 1px"><ul>
+             <li>общее число блюд: {{count_prosucts}}</li>
+             <li>число блюд с признаком: {{count_prosucts_labeled}}</li>
+             <li>число блюд без признака: {{count_prosucts_not_labeled}}</li>
+                     </ul></div>
+
     </div>
 
     {{ formset_salad.management_form }}

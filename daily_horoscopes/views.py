@@ -4,7 +4,7 @@ from .models import Base, Product, Timetable
 from .forms import UserRegistrationForm, UserloginForm, TimetableForm
 from django.forms import modelformset_factory
 from .serializers import ProductSerializer
-
+from django.db.models import Q
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -208,7 +208,9 @@ def index(request):
         date_default = str(date.today())
     else:
         date_default = str(request.POST['datetime'])
-
+    count_prosucts = len(Product.objects.all())
+    count_prosucts_labeled = len(Product.objects.filter(Q(ovd='True')|Q(ovd_sugarless='True')|Q(shd='True')|Q(bd='True')|Q(vbd='True')|Q(nbd='True')|Q(nkd='True')|Q(vkd='True')))
+    count_prosucts_not_labeled = count_prosucts - count_prosucts_labeled
     queryset_salad = Product.objects.filter(timetable__datetime=date_default).filter(category='Салаты')
     queryset_soup = Product.objects.filter(timetable__datetime=date_default).filter(category='Первые блюда')
     queryset_main_dishes = Product.objects.filter(timetable__datetime=date_default).filter(category='Вторые блюда')
@@ -233,6 +235,9 @@ def index(request):
                            'formset_soup': formset_soup,
                            'formset_main_dishes': formset_main_dishes,
                            'formset_side_dishes': formset_side_dishes,
+                           'count_prosucts': count_prosucts,
+                           'count_prosucts_labeled': count_prosucts_labeled,
+                           'count_prosucts_not_labeled': count_prosucts_not_labeled,
                            })
         else:
             formset_salad.save()
@@ -272,6 +277,9 @@ def index(request):
                 'formset_main_dishes': formset_main_dishes,
                 'formset_side_dishes': formset_side_dishes,
                 'formset_soup': formset_soup,
+                'count_prosucts': count_prosucts,
+                'count_prosucts_labeled': count_prosucts_labeled,
+                'count_prosucts_not_labeled': count_prosucts_not_labeled,
                 # 'formset_e': formset._errors,
             }
             return render(request, 'index.html', context=data)
@@ -291,6 +299,9 @@ def index(request):
             'formset_main_dishes': formset_main_dishes,
             'formset_side_dishes': formset_side_dishes,
             'formset_soup': formset_soup,
+            'count_prosucts': count_prosucts,
+            'count_prosucts_labeled': count_prosucts_labeled,
+            'count_prosucts_not_labeled': count_prosucts_not_labeled,
             # 'formset_e': formset._errors
         }
     return render(request, 'index.html', context=data)
