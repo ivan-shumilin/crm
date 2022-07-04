@@ -180,6 +180,7 @@ def index(request):
     queryset_main_dishes = Product.objects.filter(timetable__datetime=date_default).filter(category='Вторые блюда')
     queryset_side_dishes = Product.objects.filter(timetable__datetime=date_default).filter(category='Гарниры')
     if request.method == 'POST' and 'save' in request.POST:
+        form_date = TimetableForm(request.POST)
         formset_salad = \
             ProductFormSet(request.POST, request.FILES, queryset=queryset_salad, prefix='salad')
         formset_soup = \
@@ -202,6 +203,7 @@ def index(request):
                            'count_prosucts': count_prosucts,
                            'count_prosucts_labeled': count_prosucts_labeled,
                            'count_prosucts_not_labeled': count_prosucts_not_labeled,
+                           'form_date': form_date,
                            })
         else:
             formset_salad.save()
@@ -218,7 +220,7 @@ def index(request):
     if request.method == 'POST' and 'find_date' in request.POST:
         form_date = TimetableForm(request.POST)
         if form_date.is_valid():
-
+            date_default = str(form_date.cleaned_data["datetime"])
             queryset_salad = Product.objects.filter(timetable__datetime=str(form_date.cleaned_data["datetime"])).filter(
                 category='Салаты')
             queryset_soup = Product.objects.filter(timetable__datetime=str(form_date.cleaned_data["datetime"])).filter(
@@ -229,7 +231,7 @@ def index(request):
             queryset_side_dishes = Product.objects.filter(
                 timetable__datetime=str(form_date.cleaned_data["datetime"])).filter(category='Гарниры')
 
-            date_default = str(form_date.cleaned_data["datetime"])
+
             formset_salad = ProductFormSet(queryset=queryset_salad, prefix='salad')
             formset_soup = ProductFormSet(queryset=queryset_soup, prefix='soup')
             formset_main_dishes = ProductFormSet(queryset=queryset_main_dishes, prefix='main_dishes')
