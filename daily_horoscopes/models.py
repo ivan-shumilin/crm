@@ -35,6 +35,7 @@ class Product(models.Model):
     nkd = models.BooleanField(null=True)
     vkd = models.BooleanField(null=True)
     category = models.CharField(max_length=2000, null=True)
+    cooking_method = models.CharField(max_length=7000, null=True)
 
     def __str__(self):
         return f'{self.name}, {self.category}'
