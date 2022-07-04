@@ -944,8 +944,10 @@ def load_cooking_method():
     base = Product.objects.all()
 
     for item in base:
-        item.cooking_method = dict.get(item.name)
-        item.save()
+        if ("ТРЕБОВАНИЯ К ОФОРМЛЕНИЮ, ПОДАЧЕ И РЕАЛИЗАЦИИ" in str(item.cooking_method)) or item.cooking_method == None:
+            if len(str(item.cooking_method).split(' ')) <= 7:
+                item.cooking_method = 'Отсутствует'
+                item.save()
 
 
 URL = 'https://cloud-api.yandex.net/v1/disk/resources'
