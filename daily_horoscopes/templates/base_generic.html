@@ -11,6 +11,21 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
     <title>{% block title %}Nutritionist tool{% endblock %}</title>
+    <style>
+    body {
+        color: #434343
+    }
+    hr {
+        margin: 1rem 0;
+        color: #000;
+        background-color: currentColor;
+        border: 0;
+        opacity: 0.1 !important;
+    }
+    .page {
+        font-size: 0.8rem !important;;
+    }
+</style>
 
 </head>
 <body>
@@ -19,7 +34,10 @@
   <div class="container-md">
       <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
         <li class="nav-item px-2">
-          <a class="nav-link text-white" aria-current="page" href="{% url 'index'  %}">Главная</a>
+          <a class="nav-link text-white" aria-current="page" href="{% url 'index'  %}">По дням</a>
+        </li>
+        <li class="nav-item px-2">
+          <a class="nav-link text-white" aria-current="page" href="{% url 'salad' page='50'  %}">По категориям</a>
         </li>
       {% if user.is_authenticated %}
         <li class="nav-item px-2 text-white nav-link mr-2">{{ user }}</li>

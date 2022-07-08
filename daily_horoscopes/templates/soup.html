@@ -1,0 +1,145 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<div class="container">
+    <div class="row" style="margin-bottom: 50px">
+        <div class="col-6" style="margin-top: 12px;">
+    <div class="row" style="margin-bottom: 50px">
+        <div class="col" style="margin-top: 1px">
+        <a type="button" href="{% url 'salad' page='50' %}" class="btn btn-outline-primary" style="width: 132px;padding-left: 0px;padding-right: 0px;">Салаты</a>
+    </div>
+        <div class="col" style="">
+        <a type="button" href="{% url 'soup' page='50' %}" class="btn btn-primary" style="width: 132px;padding-left: 0px;padding-right: 0px;">Cупы</a>
+    </div>
+        <div class="col" style="">
+        <a type="button" href="{% url 'main_dishes' page='50' %}" class="btn btn-outline-primary" style="width: 132px;padding-left: 0px;padding-right: 0px;">Горячие блюда</a>
+    </div>
+        <div class="col"  style="">
+        <a type="button" href="{% url 'side_dishes' page='50' %}"  class="btn btn-outline-primary" style="width: 132px;padding-left: 0px;padding-right: 0px;">Гарниры</a>
+    </div>
+    </div>
+    <div class="row" style="margin-bottom: 50px">
+        <div class="col" style="">
+        {% if page == '50' %}
+            <a  class="page btn btn-primary" style="margin-bottom: 10px;padding-left: 21px;padding-right: 21px;" href="{% url 'soup' page='50' %}">1   -  50</a>
+        {% else %}
+            <a  class="page btn btn-outline-primary" style="margin-bottom: 10px;padding-left: 21px;padding-right: 21px;" href="{% url 'soup' page='50' %}">1   -   50</a>
+        {% endif %}
+    </div>
+        <div class="col" style="">
+        {% if page == '100' %}
+            <a  class="page btn btn-primary" style="margin-bottom: 10px;" href="{% url 'soup' page='100' %}">51 - 100</a>
+        {% else %}
+            <a  class="page btn btn-outline-primary" style="margin-bottom: 10px;" href="{% url 'soup' page='100' %}">51 - 100</a>
+        {% endif %}
+    </div>
+        <div class="col" style="">
+        {% if page == '150' %}
+            <a  class="page btn btn-primary" style="margin-bottom: 10px;" href="{% url 'soup' page='150' %}">101 - 134</a>
+        {% else %}
+            <a  class="page btn btn-outline-primary" style="margin-bottom: 10px;" href="{% url 'soup' page='150' %}">101 - 134</a>
+        {% endif %}
+    </div>
+    </div>
+</div>
+        <div class="col-4" style="margin-top: 1px">
+        <ul style="line-height: 2.3;">
+            <li>категория: <i style="color:#0d6efd;"> Первые блюда</i></li>
+            <li>общее число блюд: <i style="color:#0d6efd;"> {{count_prosucts}}</i></li>
+            <li>число блюд с признаком: <i style="color:#0d6efd;"> {{count_prosucts_labeled}}</i></li>
+            <li>число блюд без признака: <i style="color:#0d6efd;"> {{count_prosucts_not_labeled}}</i></li>
+        </ul>
+</div>
+    </div>
+</div>
+
+<form style='padding-left: 0px; padding-right: 0px;' action="" method="post">
+    {% csrf_token %}
+    {{ formset.management_form }}
+
+
+    <div style="margin-bottom: 30px;">
+    {% for form in formset %}
+
+    {{ form.iditem }}
+    {{ form.id }}
+    {{ form.description }}
+    {{ form.name }}
+    {{ form.names }}
+    {{ form.fat }}
+    {{ form.fiber }}
+    {{ form.carbohydrate }}
+    {{ form.energy }}
+    {{ form.category }}
+    {{ form.cooking_method }}
+
+
+
+    <div class="row"  >
+
+
+        <div class="col-3">{{ form.name.value }}</div>
+        <div class="col" style="margin-right: 20px;">
+            <button type="button" class="btn btn-outline-primary" style="margin-bottom: 10px;" data-bs-toggle="modal"
+                    data-bs-target="#modal-start{{ form.iditem.value }}">Состав
+            </button>
+        </div>
+
+        <div class=" col form-check form-switch" style="margin-left: 1px;">
+            {{ form.ovd }}
+            <label class="form-check-label">ОВД</label>
+        </div>
+        <div class=" col form-check form-switch" style="margin-left: 1px; padding-right: 0px; padding-left: 20px;">
+            {{ form.ovd_sugarless }}
+            <label class="form-check-label">ОВД</label>
+            <p style="font-size: 0.7rem;">без сахара</p>
+        </div>
+        <div class=" col form-check form-switch" style="margin-left: 1px;">{{ form.shd }}
+            <label class="form-check-label">ЩД</label></div>
+        <div class=" col form-check form-switch" style="margin-left: 1px;">{{ form.bd }}
+            <label class="form-check-label">БД</label></div>
+        <div class=" col form-check form-switch" style="margin-left: 1px;">{{ form.vbd }}
+            <label class="form-check-label">ВБД</label></div>
+        <div class=" col form-check form-switch" style="margin-left: 1px;">{{ form.nbd }}
+            <label class="form-check-label">НБД</label></div>
+        <div class=" col form-check form-switch" style="margin-left: 1px;">{{ form.nkd }}
+            <label class="form-check-label">НКД</label></div>
+        <div class=" col form-check form-switch" style="margin-left: 1px;">{{ form.vkd }}
+            <label class="form-check-label">ВКД</label></div>
+        <hr style="opacity: 0.11">
+
+
+        <div id="modal-start{{ form.iditem.value }}" class="modal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ form.name.value }}</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Состав:</strong> {{ form.description.value|cut:"Состав:"|cut:"Состав"|cut:" :" }}</p>
+                        <hr>
+                        <p><strong>БЖУ:</strong> Белки - {{ form.fiber.value|floatformat  }} г, жиры - {{ form.fat.value|floatformat  }} г, углеводы - {{ form.carbohydrate.value|floatformat  }} г, ккал - {{ form.energy.value|floatformat  }}.</p>
+                        <hr>
+                        <p><strong>Способ приготовления:</strong> {{ form.cooking_method.value|cut:"ТРЕБОВАНИЯ К ОФОРМЛЕНИЮ, ПОДАЧЕ И РЕАЛИЗАЦИИ"}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn-close btn btn-secondary" data-bs-dismiss="modal"
+                                aria-label="Close">Закрыть
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+{% endfor %}
+    </div>
+    <input name="save" class="btn btn-primary btn-lg btn-block" type="submit" value="Сохранить">
+</form>
+
+
+
+{% endblock %}

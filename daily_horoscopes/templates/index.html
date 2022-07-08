@@ -12,13 +12,14 @@
         {% if error.error_messages %}
             <div class="col-12 col-md-2" style="color: #ab2437;"><span>{{ error.error_messages }}</span></div>
         {% endif %}
-         <div class="col-6" style="margin-top: 1px"><ul>
-             <li>общее число блюд: {{count_prosucts}}</li>
-             <li>число блюд с признаком: {{count_prosucts_labeled}}</li>
-             <li>число блюд без признака: {{count_prosucts_not_labeled}}</li>
-                     </ul></div>
-
-    </div>
+<div class="col-4" style="margin-top: 1px">
+        <ul style="line-height: 2.3;">
+            <li>категория: <i style="color:#0d6efd;">все блюда</i></li>
+            <li>общее число блюд: <i style="color:#0d6efd;"> {{count_prosucts}}</i></li>
+            <li>число блюд с признаком: <i style="color:#0d6efd;"> {{count_prosucts_labeled}}</i></li>
+            <li>число блюд без признака: <i style="color:#0d6efd;"> {{count_prosucts_not_labeled}}</i></li>
+        </ul>
+</div>
 
     {{ formset_salad.management_form }}
     {{ formset_soup.management_form }}
@@ -56,11 +57,12 @@
             {{ form.ovd }}
             <label class="form-check-label">ОВД</label>
         </div>
-        <div class=" col form-check form-switch" style="margin-left: 1px;">
+        <div class=" col form-check form-switch" style="margin-left: 1px;padding-right: 0px;padding-left: 20px;">
             {{ form.ovd_sugarless }}
-            <label class="form-check-label">ОВД без сахара</label>
+            <label class="form-check-label">ОВД</label>
+            <p style="font-size: 0.7rem;">без сахара</p>
         </div>
-        <div class=" col form-check form-switch" style="margin-left: 1px;">{{ form.shd }}
+        <div class=" col form-check form-switch" style="margin-left: 1px; padding-right: 0px;">{{ form.shd }}
             <label class="form-check-label">ЩД</label></div>
         <div class=" col form-check form-switch" style="margin-left: 1px;">{{ form.bd }}
             <label class="form-check-label">БД</label></div>
@@ -132,15 +134,16 @@
             </button>
         </div>
 
-        <div class=" col form-check form-switch" style="margin-left: 12px;">
+        <div class=" col form-check form-switch" style="margin-left: 0px;">
             {{ form.ovd }}
             <label class="form-check-label">ОВД</label>
         </div>
-        <div class=" col form-check form-switch" style="margin-left: 1px;">
+        <div class=" col form-check form-switch" style="margin-left: 1px; padding-right: 0px; padding-left: 20px;">
             {{ form.ovd_sugarless }}
-            <label class="form-check-label">ОВД без сахара</label>
+            <label class="form-check-label">ОВД</label>
+            <p style="font-size: 0.7rem;">без сахара</p>
         </div>
-        <div class=" col form-check form-switch" style="margin-left: 1px;">{{ form.shd }}
+        <div class=" col form-check form-switch" style="margin-left: 1px; padding-right: 0px;">{{ form.shd }}
             <label class="form-check-label">ЩД</label></div>
         <div class=" col form-check form-switch" style="margin-left: 1px;">{{ form.bd }}
             <label class="form-check-label">БД</label></div>
@@ -212,15 +215,16 @@
             </button>
         </div>
 
-        <div class="col form-check form-switch" style="margin-left: 12px;">
+        <div class="col form-check form-switch" style="margin-left: 0px;">
             {{ form.ovd }}
             <label class="form-check-label">ОВД</label>
         </div>
-        <div class="col form-check form-switch" style="margin-left: 1px;">
+        <div class="col form-check form-switch" style="margin-left: 1px; padding-right: 0px; padding-left: 20px;">
             {{ form.ovd_sugarless }}
-            <label class="form-check-label">ОВД без сахара</label>
+            <label class="form-check-label">ОВД</label>
+            <p style="font-size: 0.7rem;">без сахара</p>
         </div>
-        <div class="col form-check form-switch" style="margin-left: 1px;">{{ form.shd }}
+        <div class="col form-check form-switch" style="margin-left: 1px; padding-right: 0px;">{{ form.shd }}
             <label class="form-check-label">ЩД</label></div>
         <div class="col form-check form-switch" style="margin-left: 1px;">{{ form.bd }}
             <label class="form-check-label">БД</label></div>
@@ -292,15 +296,16 @@
             </button>
         </div>
 
-        <div class="col form-check form-switch" style="margin-left: 1px;">
+        <div class="col form-check form-switch" style="margin-left: 0px;">
             {{ form.ovd }}
             <label class="form-check-label">ОВД</label>
         </div>
-        <div class="col form-check form-switch" style="margin-left: 1px;">
+        <div class="col form-check form-switch" style="margin-left: 1px; padding-right: 0px; padding-left: 20px;">
             {{ form.ovd_sugarless }}
-            <label class="form-check-label">ОВД без сахара</label>
+            <label class="form-check-label">ОВД</label>
+            <p style="font-size: 0.7rem;">без сахара</p>
         </div>
-        <div class="col form-check form-switch" style="margin-left: 1px;">{{ form.shd }}
+        <div class="col form-check form-switch" style="margin-left: 1px; padding-right: 0px;">{{ form.shd }}
             <label class="form-check-label">ЩД</label></div>
         <div class="col form-check form-switch" style="margin-left: 1px;">{{ form.bd }}
             <label class="form-check-label">БД</label></div>
