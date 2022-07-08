@@ -269,84 +269,84 @@ def index(request):
     return render(request, 'index.html', context=data)
 
 
-@login_required
-def catalog(request):
-    error = ''
-    ProductFormSet = modelformset_factory(Product,
-                                          fields=(
-                                              'iditem', 'name', 'description', 'ovd', 'ovd_sugarless', 'shd', 'bd',
-                                              'vbd', 'nbd', 'nkd',
-                                              'vkd', 'carbohydrate', 'fat', 'fiber', 'energy', 'category',
-                                              'cooking_method'),
-                                          widgets={'ovd': CheckboxInput(
-                                              attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-                                              'ovd_sugarless': CheckboxInput(
-                                                  attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-                                              'shd': CheckboxInput(
-                                                  attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-                                              'bd': CheckboxInput(
-                                                  attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-                                              'vbd': CheckboxInput(
-                                                  attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-                                              'nbd': CheckboxInput(
-                                                  attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-                                              'nkd': CheckboxInput(
-                                                  attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-                                              'vkd': CheckboxInput(
-                                                  attrs={'class': 'form-check-input', 'type': 'checkbox'}),
-                                              'name': Textarea(attrs={'style': "display: none;"}),
-                                              'description': Textarea(attrs={'style': "display: none;"}),
-                                              'carbohydrate': Textarea(attrs={'style': "display: none;"}),
-                                              'iditem': Textarea(attrs={'style': "display: none;"}),
-                                              'fat': Textarea(attrs={'style': "display: none;"}),
-                                              'fiber': Textarea(attrs={'style': "display: none;"}),
-                                              'energy': Textarea(attrs={'style': "display: none;"}),
-                                              'category': Textarea(attrs={'style': "display: none;"}),
-                                              'cooking_method': Textarea(attrs={'style': "display: none;"}),
-                                          },
-                                          extra=0, )
-    count_prosucts = len(Product.objects.all())
-    count_prosucts_labeled = len(Product.objects.filter(
-        Q(ovd='True') | Q(ovd_sugarless='True') | Q(shd='True') | Q(bd='True') | Q(vbd='True') | Q(nbd='True') | Q(
-            nkd='True') | Q(vkd='True')))
-    count_prosucts_not_labeled = count_prosucts - count_prosucts_labeled
-
-    queryset = Product.objects.all()
-    queryset = Paginator(queryset, 5)
-    if request.method == 'POST' and 'save' in request.POST:
-        formset = \
-            ProductFormSet(request.POST, request.FILES, queryset=queryset, prefix='all')
-        if not formset.is_valid():
-            return render(request,
-                          'catalog.html',
-                          {'formset': formset,
-                           'count_prosucts': count_prosucts,
-                           'count_prosucts_labeled': count_prosucts_labeled,
-                           'count_prosucts_not_labeled': count_prosucts_not_labeled,
-
-                           })
-        else:
-            formset.save()
-            data = {
-                'formset': formset,
-                'count_prosucts': count_prosucts,
-                'count_prosucts_labeled': count_prosucts_labeled,
-                'count_prosucts_not_labeled': count_prosucts_not_labeled,
-                # 'formset_e': formset._errors
-            }
-            return render(request, 'catalog.html', context=data)
-
-    else:
-        formset = ProductFormSet(queryset=queryset, prefix='all')
-
-        data = {
-            'formset': formset,
-            'count_prosucts': count_prosucts,
-            'count_prosucts_labeled': count_prosucts_labeled,
-            'count_prosucts_not_labeled': count_prosucts_not_labeled,
-            # 'formset_e': formset._errors
-        }
-    return render(request, 'catalog.html', context=data)
+# @login_required
+# def catalog(request):
+#     error = ''
+#     ProductFormSet = modelformset_factory(Product,
+#                                           fields=(
+#                                               'iditem', 'name', 'description', 'ovd', 'ovd_sugarless', 'shd', 'bd',
+#                                               'vbd', 'nbd', 'nkd',
+#                                               'vkd', 'carbohydrate', 'fat', 'fiber', 'energy', 'category',
+#                                               'cooking_method'),
+#                                           widgets={'ovd': CheckboxInput(
+#                                               attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+#                                               'ovd_sugarless': CheckboxInput(
+#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+#                                               'shd': CheckboxInput(
+#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+#                                               'bd': CheckboxInput(
+#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+#                                               'vbd': CheckboxInput(
+#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+#                                               'nbd': CheckboxInput(
+#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+#                                               'nkd': CheckboxInput(
+#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+#                                               'vkd': CheckboxInput(
+#                                                   attrs={'class': 'form-check-input', 'type': 'checkbox'}),
+#                                               'name': Textarea(attrs={'style': "display: none;"}),
+#                                               'description': Textarea(attrs={'style': "display: none;"}),
+#                                               'carbohydrate': Textarea(attrs={'style': "display: none;"}),
+#                                               'iditem': Textarea(attrs={'style': "display: none;"}),
+#                                               'fat': Textarea(attrs={'style': "display: none;"}),
+#                                               'fiber': Textarea(attrs={'style': "display: none;"}),
+#                                               'energy': Textarea(attrs={'style': "display: none;"}),
+#                                               'category': Textarea(attrs={'style': "display: none;"}),
+#                                               'cooking_method': Textarea(attrs={'style': "display: none;"}),
+#                                           },
+#                                           extra=0, )
+#     count_prosucts = len(Product.objects.all())
+#     count_prosucts_labeled = len(Product.objects.filter(
+#         Q(ovd='True') | Q(ovd_sugarless='True') | Q(shd='True') | Q(bd='True') | Q(vbd='True') | Q(nbd='True') | Q(
+#             nkd='True') | Q(vkd='True')))
+#     count_prosucts_not_labeled = count_prosucts - count_prosucts_labeled
+#
+#     queryset = Product.objects.all()
+#     queryset = Paginator(queryset, 5)
+#     if request.method == 'POST' and 'save' in request.POST:
+#         formset = \
+#             ProductFormSet(request.POST, request.FILES, queryset=queryset, prefix='all')
+#         if not formset.is_valid():
+#             return render(request,
+#                           'catalog.html',
+#                           {'formset': formset,
+#                            'count_prosucts': count_prosucts,
+#                            'count_prosucts_labeled': count_prosucts_labeled,
+#                            'count_prosucts_not_labeled': count_prosucts_not_labeled,
+#
+#                            })
+#         else:
+#             formset.save()
+#             data = {
+#                 'formset': formset,
+#                 'count_prosucts': count_prosucts,
+#                 'count_prosucts_labeled': count_prosucts_labeled,
+#                 'count_prosucts_not_labeled': count_prosucts_not_labeled,
+#                 # 'formset_e': formset._errors
+#             }
+#             return render(request, 'catalog.html', context=data)
+#
+#     else:
+#         formset = ProductFormSet(queryset=queryset, prefix='all')
+#
+#         data = {
+#             'formset': formset,
+#             'count_prosucts': count_prosucts,
+#             'count_prosucts_labeled': count_prosucts_labeled,
+#             'count_prosucts_not_labeled': count_prosucts_not_labeled,
+#             # 'formset_e': formset._errors
+#         }
+#     return render(request, 'catalog.html', context=data)
 
 def page_func(page):
     if page == '50':
@@ -431,7 +431,7 @@ def catalog_salad(request, page):
             ProductFormSet(request.POST, request.FILES, queryset=queryset, prefix='salad')
         if not formset.is_valid():
             return render(request,
-                          'catalog.html',
+                          'salad.html',
                           {'formset': formset,
                            'count_prosucts': count_prosucts,
                            'count_prosucts_labeled': count_prosucts_labeled,
