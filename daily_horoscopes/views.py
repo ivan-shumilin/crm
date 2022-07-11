@@ -128,14 +128,14 @@ def load_timetable(dict_tests):
 
 @login_required
 def index(request):
-    js = open("daily_horoscopes/descriptions_from_tk.json").read()
-    dict_tk_descriptions = json.loads(js)
-    all = Product.objects.all()
-    for item in all:
-        value = dict_tk_descriptions.get(item.name)
-        if value == None:
-            continue
-        item.description = value
+    # js = open("daily_horoscopes/descriptions_from_tk.json").read()
+    # dict_tk_descriptions = json.loads(js)
+    # all = Product.objects.all()
+    # for item in all:
+    #     value = dict_tk_descriptions.get(item.name)
+    #     if value == None:
+    #         continue
+    #     item.description = value
     error = ''
     ProductFormSet = modelformset_factory(Product,
                                           fields=(
@@ -249,6 +249,7 @@ def index(request):
                 'count_prosucts': count_prosucts,
                 'count_prosucts_labeled': count_prosucts_labeled,
                 'count_prosucts_not_labeled': count_prosucts_not_labeled,
+
                 # 'formset_e': formset._errors,
             }
             return render(request, 'index.html', context=data)
@@ -271,9 +272,11 @@ def index(request):
             'count_prosucts': count_prosucts,
             'count_prosucts_labeled': count_prosucts_labeled,
             'count_prosucts_not_labeled': count_prosucts_not_labeled,
+
             # 'formset_e': formset._errors
         }
     return render(request, 'index.html', context=data)
+
 
 
 # @login_required

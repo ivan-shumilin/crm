@@ -5,9 +5,9 @@ from .models import Base, Product, Timetable
 admin.site.register(Base)
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name','cooking_method', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd', 'vkd', 'category')
-    fields = ('name', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd', 'vkd', 'category')
-    list_filter = ('category', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd', 'vkd')
+    list_display = ('name', 'description', 'cooking_method', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd', 'vkd', 'category')
+    fields = ('name', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd', 'vkd', 'category', 'description')
+    list_filter = ('category', 'ovd', 'shd', 'bd', 'vbd', 'nbd', 'nkd', 'vkd', 'description')
     # list_filter = ('status', 'due_back')
 
 class TimetableAdmin(admin.ModelAdmin):
