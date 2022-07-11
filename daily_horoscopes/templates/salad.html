@@ -56,7 +56,8 @@
 </div>
 </div>
 <div class="col-4" style="margin-top: 1px">
-        <ul style="line-height: 2.3;">
+        <ul style="line-height: 1.8;">
+            <li><progress id="progressBar" max="100" value="{{progress}}"></progress><i style="color:#0d6efd;">{{progress}}%</i></li>
             <li>категория: <i style="color:#0d6efd;"> салаты</i></li>
             <li>общее число блюд: <i style="color:#0d6efd;"> {{count_prosucts}}</i></li>
             <li>число блюд с признаком: <i style="color:#0d6efd;"> {{count_prosucts_labeled}}</i></li>
@@ -126,7 +127,7 @@
 
         <div id="modal-start{{ form.iditem.value }}" class="modal" tabindex="-1">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content" style="width:800px;">
                     <div class="modal-header">
                         <h5 class="modal-title">{{ form.name.value }}</h5>
                         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -139,7 +140,7 @@
                         <p><strong>БЖУ:</strong> Белки - {{ form.fiber.value|floatformat  }} г, жиры - {{ form.fat.value|floatformat  }} г, углеводы - {{ form.carbohydrate.value|floatformat  }} г, ккал - {{ form.energy.value|floatformat  }}.</p>
                         <hr>
                         <p><strong>Способ приготовления:</strong> {{ form.cooking_method.value|cut:"ТРЕБОВАНИЯ К ОФОРМЛЕНИЮ, ПОДАЧЕ И РЕАЛИЗАЦИИ"}}</p>
-                    </div>
+
                     <div class="modal-footer">
                         <button type="button" class="btn-close btn btn-secondary" data-bs-dismiss="modal"
                                 aria-label="Close">Закрыть
@@ -150,10 +151,11 @@
         </div>
 
     </div>
-
-{% endfor %}
     </div>
+{% endfor %}
+
     <input name="save" class="btn btn-primary btn-lg btn-block" type="submit" value="Сохранить">
+    </div>
 </form>
 
 

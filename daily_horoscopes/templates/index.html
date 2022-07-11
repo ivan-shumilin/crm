@@ -12,14 +12,16 @@
         {% if error.error_messages %}
             <div class="col-12 col-md-2" style="color: #ab2437;"><span>{{ error.error_messages }}</span></div>
         {% endif %}
-<div class="col-4" style="margin-top: 1px">
+<div class="col-7" style="margin-top: 1px">
         <ul style="line-height: 2.3;">
+            <li><progress id="progressBar" max="100" value="{{progress}}"></progress><i style="color:#0d6efd;">{{progress}}%</i></li>
             <li>категория: <i style="color:#0d6efd;">все блюда</i></li>
             <li>общее число блюд: <i style="color:#0d6efd;"> {{count_prosucts}}</i></li>
             <li>число блюд с признаком: <i style="color:#0d6efd;"> {{count_prosucts_labeled}}</i></li>
             <li>число блюд без признака: <i style="color:#0d6efd;"> {{count_prosucts_not_labeled}}</i></li>
         </ul>
 </div>
+
 
     {{ formset_salad.management_form }}
     {{ formset_soup.management_form }}

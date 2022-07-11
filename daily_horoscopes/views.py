@@ -179,6 +179,7 @@ def index(request):
         Q(ovd='True') | Q(ovd_sugarless='True') | Q(shd='True') | Q(bd='True') | Q(vbd='True') | Q(nbd='True') | Q(
             nkd='True') | Q(vkd='True')))
     count_prosucts_not_labeled = count_prosucts - count_prosucts_labeled
+    progress = int(count_prosucts_labeled * 100 / count_prosucts)
     queryset_salad = Product.objects.filter(timetable__datetime=date_default).filter(category='Салаты')
     queryset_soup = Product.objects.filter(timetable__datetime=date_default).filter(category='Первые блюда')
     queryset_main_dishes = Product.objects.filter(timetable__datetime=date_default).filter(category='Вторые блюда')
@@ -208,6 +209,7 @@ def index(request):
                            'count_prosucts_labeled': count_prosucts_labeled,
                            'count_prosucts_not_labeled': count_prosucts_not_labeled,
                            'form_date': form_date,
+                           'progress': progress,
                            })
         else:
             formset_salad.save()
@@ -249,6 +251,7 @@ def index(request):
                 'count_prosucts': count_prosucts,
                 'count_prosucts_labeled': count_prosucts_labeled,
                 'count_prosucts_not_labeled': count_prosucts_not_labeled,
+                'progress': progress,
 
                 # 'formset_e': formset._errors,
             }
@@ -272,6 +275,7 @@ def index(request):
             'count_prosucts': count_prosucts,
             'count_prosucts_labeled': count_prosucts_labeled,
             'count_prosucts_not_labeled': count_prosucts_not_labeled,
+            'progress': progress,
 
             # 'formset_e': formset._errors
         }
@@ -388,7 +392,8 @@ def get_stat(category):
         Q(ovd='True') | Q(ovd_sugarless='True') | Q(shd='True') | Q(bd='True') | Q(vbd='True') | Q(nbd='True') | Q(
             nkd='True') | Q(vkd='True')))
     count_prosucts_not_labeled = count_prosucts - count_prosucts_labeled
-    return count_prosucts, count_prosucts_labeled, count_prosucts_not_labeled
+    progress = int(count_prosucts_labeled * 100 / count_prosucts)
+    return count_prosucts, count_prosucts_labeled, count_prosucts_not_labeled, progress
 
 
 @login_required
@@ -428,7 +433,7 @@ def catalog_salad(request, page):
                                               'cooking_method': Textarea(attrs={'style': "display: none;"}),
                                           },
                                           extra=0, )
-    count_prosucts, count_prosucts_labeled, count_prosucts_not_labeled = get_stat('Салаты')
+    count_prosucts, count_prosucts_labeled, count_prosucts_not_labeled, progress = get_stat('Салаты')
 
     page_start, page_finish = page_func(page)
     q = Product.objects.filter(category='Салаты')[page_start:page_finish]
@@ -446,17 +451,18 @@ def catalog_salad(request, page):
                            'count_prosucts': count_prosucts,
                            'count_prosucts_labeled': count_prosucts_labeled,
                            'count_prosucts_not_labeled': count_prosucts_not_labeled,
-
+                           'progress': progress,
                            })
         else:
             formset.save()
-            count_prosucts, count_prosucts_labeled, count_prosucts_not_labeled = get_stat('Салаты')
+            count_prosucts, count_prosucts_labeled, count_prosucts_not_labeled, progress = get_stat('Салаты')
             data = {
                 'page': page,
                 'formset': formset,
                 'count_prosucts': count_prosucts,
                 'count_prosucts_labeled': count_prosucts_labeled,
                 'count_prosucts_not_labeled': count_prosucts_not_labeled,
+                'progress': progress,
                 # 'formset_e': formset._errors
             }
             return render(request, 'salad.html', context=data)
@@ -470,6 +476,7 @@ def catalog_salad(request, page):
             'count_prosucts': count_prosucts,
             'count_prosucts_labeled': count_prosucts_labeled,
             'count_prosucts_not_labeled': count_prosucts_not_labeled,
+            'progress': progress,
             # 'formset_e': formset._errors
         }
     return render(request, 'salad.html', context=data)
@@ -511,7 +518,7 @@ def catalog_soup(request, page):
                                               'cooking_method': Textarea(attrs={'style': "display: none;"}),
                                           },
                                           extra=0, )
-    count_prosucts, count_prosucts_labeled, count_prosucts_not_labeled = get_stat('Первые блюда')
+    count_prosucts, count_prosucts_labeled, count_prosucts_not_labeled, progress = get_stat('Первые блюда')
 
     page_start, page_finish = page_func(page)
     q = Product.objects.filter(category='Первые блюда')[page_start:page_finish]
@@ -529,17 +536,19 @@ def catalog_soup(request, page):
                            'count_prosucts': count_prosucts,
                            'count_prosucts_labeled': count_prosucts_labeled,
                            'count_prosucts_not_labeled': count_prosucts_not_labeled,
+                           'progress': progress,
 
                            })
         else:
             formset.save()
-            count_prosucts, count_prosucts_labeled, count_prosucts_not_labeled = get_stat('Первые блюда')
+            count_prosucts, count_prosucts_labeled, count_prosucts_not_labeled, progress = get_stat('Первые блюда')
             data = {
                 'page': page,
                 'formset': formset,
                 'count_prosucts': count_prosucts,
                 'count_prosucts_labeled': count_prosucts_labeled,
                 'count_prosucts_not_labeled': count_prosucts_not_labeled,
+                'progress': progress,
                 # 'formset_e': formset._errors
             }
             return render(request, 'soup.html', context=data)
@@ -553,6 +562,7 @@ def catalog_soup(request, page):
             'count_prosucts': count_prosucts,
             'count_prosucts_labeled': count_prosucts_labeled,
             'count_prosucts_not_labeled': count_prosucts_not_labeled,
+            'progress': progress,
             # 'formset_e': formset._errors
         }
     return render(request, 'soup.html', context=data)
@@ -595,7 +605,7 @@ def catalog_main_dishes(request, page):
                                               'cooking_method': Textarea(attrs={'style': "display: none;"}),
                                           },
                                           extra=0, )
-    count_prosucts, count_prosucts_labeled, count_prosucts_not_labeled = get_stat('Вторые блюда')
+    count_prosucts, count_prosucts_labeled, count_prosucts_not_labeled, progress = get_stat('Вторые блюда')
 
     page_start, page_finish = page_func(page)
     q = Product.objects.filter(category='Вторые блюда')[page_start:page_finish]
@@ -613,17 +623,19 @@ def catalog_main_dishes(request, page):
                            'count_prosucts': count_prosucts,
                            'count_prosucts_labeled': count_prosucts_labeled,
                            'count_prosucts_not_labeled': count_prosucts_not_labeled,
+                           'progress': progress,
 
                            })
         else:
             formset.save()
-            count_prosucts, count_prosucts_labeled, count_prosucts_not_labeled = get_stat('Вторые блюда')
+            count_prosucts, count_prosucts_labeled, count_prosucts_not_labeled, progress = get_stat('Вторые блюда')
             data = {
                 'page': page,
                 'formset': formset,
                 'count_prosucts': count_prosucts,
                 'count_prosucts_labeled': count_prosucts_labeled,
                 'count_prosucts_not_labeled': count_prosucts_not_labeled,
+                'progress': progress,
                 # 'formset_e': formset._errors
             }
             return render(request, 'main_dishes.html', context=data)
@@ -637,6 +649,7 @@ def catalog_main_dishes(request, page):
             'count_prosucts': count_prosucts,
             'count_prosucts_labeled': count_prosucts_labeled,
             'count_prosucts_not_labeled': count_prosucts_not_labeled,
+            'progress': progress,
             # 'formset_e': formset._errors
         }
     return render(request, 'main_dishes.html', context=data)
@@ -678,7 +691,7 @@ def catalog_side_dishes(request, page):
                                               'cooking_method': Textarea(attrs={'style': "display: none;"}),
                                           },
                                           extra=0, )
-    count_prosucts, count_prosucts_labeled, count_prosucts_not_labeled = get_stat('Гарниры')
+    count_prosucts, count_prosucts_labeled, count_prosucts_not_labeled, progress = get_stat('Гарниры')
 
     page_start, page_finish = page_func(page)
     q = Product.objects.filter(category='Гарниры')[page_start:page_finish]
@@ -696,17 +709,19 @@ def catalog_side_dishes(request, page):
                            'count_prosucts': count_prosucts,
                            'count_prosucts_labeled': count_prosucts_labeled,
                            'count_prosucts_not_labeled': count_prosucts_not_labeled,
+                           'progress': progress,
 
                            })
         else:
             formset.save()
-            count_prosucts, count_prosucts_labeled, count_prosucts_not_labeled = get_stat('Гарниры')
+            count_prosucts, count_prosucts_labeled, count_prosucts_not_labeled, progress = get_stat('Гарниры')
             data = {
                 'page': page,
                 'formset': formset,
                 'count_prosucts': count_prosucts,
                 'count_prosucts_labeled': count_prosucts_labeled,
                 'count_prosucts_not_labeled': count_prosucts_not_labeled,
+                'progress': progress,
                 # 'formset_e': formset._errors
             }
             return render(request, 'side_dishes.html', context=data)
@@ -720,6 +735,7 @@ def catalog_side_dishes(request, page):
             'count_prosucts': count_prosucts,
             'count_prosucts_labeled': count_prosucts_labeled,
             'count_prosucts_not_labeled': count_prosucts_not_labeled,
+            'progress': progress,
             # 'formset_e': formset._errors
         }
     return render(request, 'side_dishes.html', context=data)
